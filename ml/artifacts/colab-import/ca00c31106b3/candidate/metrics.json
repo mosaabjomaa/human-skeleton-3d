@@ -1,0 +1,43 @@
+{
+  "status": "unvalidated_research_candidate",
+  "input_size": 640,
+  "threshold": 0.15,
+  "validation": {
+    "box_precision_iou50": 0.6464646464646465,
+    "box_recall_iou50": 0.5039370078740157,
+    "image_sensitivity": 0.6635514018691588,
+    "image_specificity": 0.9817813765182186,
+    "box_tp": 64,
+    "box_fp": 35,
+    "box_fn": 63,
+    "image_tp": 71,
+    "image_fp": 9,
+    "image_tn": 485,
+    "image_fn": 36,
+    "images": 601,
+    "fracture_images": 107
+  },
+  "test": {
+    "box_precision_iou50": 0.584070796460177,
+    "box_recall_iou50": 0.46808510638297873,
+    "image_sensitivity": 0.6481481481481481,
+    "image_specificity": 0.9757575757575757,
+    "box_tp": 66,
+    "box_fp": 47,
+    "box_fn": 75,
+    "image_tp": 70,
+    "image_fp": 12,
+    "image_tn": 483,
+    "image_fn": 38,
+    "images": 603,
+    "fracture_images": 108
+  },
+  "weights_sha256": "653f2a51524a344158062215d946ad81ae0e042309350b666175ba1d9ea1a9e6",
+  "engineering_target": {
+    "box_precision_iou50": 0.8,
+    "box_recall_iou50": 0.8
+  },
+  "meets_engineering_target": false,
+  "clinical_validation": false,
+  "note": "Engineering targets are not clinical acceptance criteria. Patient-level independence is unverified. No bruise/hairline subtype or automatic 3D localization."
+}

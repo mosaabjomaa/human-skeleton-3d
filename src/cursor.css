@@ -1,0 +1,25 @@
+@media (hover: hover) and (pointer: fine) {
+  body,
+  body * {
+    cursor: url("./assets/bone-cursor.svg") 3 2, auto;
+  }
+
+  button:not(:disabled),
+  a[href],
+  summary,
+  [role="button"],
+  input[type="range"],
+  select {
+    cursor: url("./assets/bone-cursor.svg") 3 2, pointer;
+  }
+
+  input:not([type="range"]):not([type="checkbox"]),
+  textarea {
+    cursor: text;
+  }
+
+  button:disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+}

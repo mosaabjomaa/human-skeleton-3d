@@ -1,0 +1,298 @@
+.xray-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #04100ee8;
+  backdrop-filter: blur(16px);
+  padding: 24px;
+  overflow: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.xray-lab {
+  width: min(1200px, 100%);
+  background: #0d1c19;
+  color: #edf6ef;
+  border: 1px solid #3b594b;
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 30px 100px #0007;
+  margin: auto;
+}
+.xray-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.xray-header h2 {
+  font-size: 36px;
+  margin: 6px 0 16px;
+  font-weight: 500;
+}
+.xray-lab button {
+  cursor: pointer;
+  border: 1px solid #425e51;
+  border-radius: 9px;
+  padding: 10px 16px;
+  color: #def1e4;
+  background: #203b2e;
+  font: inherit;
+}
+.xray-lab button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.xray-lab button:focus-visible,
+.xray-lab select:focus-visible,
+.xray-lab input:focus-visible {
+  outline: 2px solid #d3e2a3;
+  outline-offset: 3px;
+}
+.xray-lab .xray-close {
+  font-size: 28px;
+  padding: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+}
+.xray-notice {
+  padding: 14px 18px;
+  border-inline-start: 3px solid #ddc27c;
+  background: #443b232f;
+  color: #e7d7b2;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.xray-columns {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 28px;
+  margin-top: 26px;
+}
+.xray-section-label {
+  letter-spacing: 0.13em;
+  font-size: 11px;
+  color: #a5bcab;
+  margin-bottom: 16px;
+}
+.xray-study > input {
+  width: 100%;
+  font-size: 12px;
+  margin-bottom: 16px;
+}
+.xray-drop {
+  background: #050c0b;
+  border: 1px dashed #466050;
+  min-height: 280px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 12px;
+}
+.xray-image {
+  position: relative;
+  max-width: 100%;
+  line-height: 0;
+}
+.xray-image img {
+  max-width: 100%;
+  max-height: 480px;
+  display: block;
+  width: auto;
+  height: auto;
+}
+.xray-box {
+  position: absolute;
+  border: 2px solid #ffcf70;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+.xray-box b {
+  position: absolute;
+  inset-inline-start: -2px;
+  top: -20px;
+  background: #ffcf70;
+  color: #1d2119;
+  padding: 3px 5px;
+  font: 11px monospace;
+  white-space: nowrap;
+}
+.xray-lab .xray-upload {
+  border: 0;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  padding: 40px;
+}
+.xray-upload > span {
+  font-size: 38px;
+  color: #d3e2a3;
+}
+.xray-upload strong {
+  font-size: 19px;
+  font-weight: 500;
+}
+.xray-upload small {
+  font-size: 11px;
+  color: #8ba393;
+}
+.xray-examples {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 14px 0;
+  font-size: 11px;
+  color: #a5bcab;
+}
+.xray-examples button {
+  font-size: 11px;
+  padding: 7px 10px;
+}
+.xray-consent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #afc4b7;
+  margin: 18px 0;
+}
+.xray-consent input {
+  margin-top: 5px;
+  accent-color: #c7db9a;
+}
+.xray-lab .xray-analyze {
+  width: 100%;
+  background: #cbdca5;
+  color: #17231c;
+  border: 0;
+  font-weight: 600;
+}
+.xray-card {
+  border: 1px solid #304b3b;
+  padding: 20px;
+  border-radius: 13px;
+  margin-bottom: 14px;
+  background: linear-gradient(145deg, #1a3024, #101f1a);
+}
+.xray-card h3 {
+  margin: 8px 0 10px;
+  font-size: 20px;
+  font-weight: 500;
+}
+.xray-card p,
+.xray-card li {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #aec3b5;
+}
+.xray-card select {
+  background: #0b1913;
+  color: #e1ecdf;
+  border: 1px solid #42604b;
+  padding: 12px;
+  width: 100%;
+  margin: 10px 0;
+  font: inherit;
+  font-size: 13px;
+}
+.xray-card > button {
+  width: 100%;
+  margin-top: 10px;
+}
+.xray-card code {
+  display: block;
+  background: #07120e;
+  padding: 12px;
+  border-radius: 6px;
+  direction: ltr;
+  font-size: 12px;
+}
+.xray-live {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: #d2dfa7;
+}
+.xray-card summary {
+  cursor: pointer;
+  font-size: 14px;
+}
+.xray-metrics {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 9px;
+  font-size: 12px;
+}
+.xray-metrics dd {
+  color: #d2dfa7;
+  margin: 0;
+}
+.xray-card a {
+  color: #d2dfa7;
+  font-size: 12px;
+}
+.xray-error {
+  color: #ffd2ae;
+  font-size: 12px;
+  line-height: 1.8;
+}
+.xray-caption {
+  font-size: 11px;
+  color: #d0c49c;
+  line-height: 1.8;
+}
+.xray-entry {
+  border: 1px solid #688258 !important;
+  color: #d2dfa7 !important;
+  border-radius: 7px;
+  padding: 8px 12px !important;
+  background: #213124 !important;
+  font: inherit;
+  font-size: 12px !important;
+}
+.xray-lab[dir="rtl"] {
+  font-family: "Cairo Variable", sans-serif;
+}
+.xray-lab[dir="rtl"] .xray-section-label {
+  letter-spacing: 0;
+}
+@media (max-width: 760px) {
+  .xray-overlay {
+    padding: 8px;
+  }
+  .xray-lab {
+    padding: 18px;
+    border-radius: 14px;
+  }
+  .xray-columns {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .xray-header h2 {
+    font-size: 27px;
+  }
+  .xray-drop {
+    min-height: 220px;
+  }
+  .xray-entry {
+    font-size: 10px !important;
+    padding: 7px !important;
+  }
+}
+.xray-native-input {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.xray-study > button:not(.xray-analyze) {
+  margin-bottom: 12px;
+}

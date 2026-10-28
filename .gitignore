@@ -1,0 +1,39 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local source/build analysis and dependency cache
+work/
+.npm-cache/
+ml/.venv/
+ml/data/
+ml/cache/
+ml/artifacts/*-features.pt
+ml/__pycache__/
+ml/config/
+ml/runs/
+.env
+.env.*
+!.env.example
+**/__pycache__/

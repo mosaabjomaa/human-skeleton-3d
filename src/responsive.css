@@ -1,0 +1,79 @@
+@media (max-width: 900px) {
+  .workspace {
+    height: auto;
+    min-height: 0;
+  }
+
+  .viewport-area {
+    min-height: clamp(480px, calc(100svh - 220px), 760px);
+  }
+
+  .library {
+    max-width: min(320px, 88vw);
+    max-height: calc(100dvh - 84px);
+    padding-bottom: max(22px, env(safe-area-inset-bottom));
+  }
+
+  [dir="rtl"] .library {
+    transform: translateX(105%);
+  }
+
+  [dir="rtl"] .library.library-open {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .workspace {
+    height: auto;
+  }
+
+  .viewport-area {
+    min-height: clamp(500px, calc(100svh - 150px), 720px);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .viewer {
+    margin-top: clamp(175px, 48vw, 215px);
+  }
+
+  .view-controls {
+    bottom: calc(143px + env(safe-area-inset-bottom));
+  }
+
+  .orientation-switch {
+    bottom: calc(15px + env(safe-area-inset-bottom));
+  }
+
+  .viewer-legend {
+    bottom: calc(19px + env(safe-area-inset-bottom));
+  }
+
+  .app-footer {
+    padding-bottom: max(17px, env(safe-area-inset-bottom));
+  }
+
+  .details-panel {
+    max-height: 85dvh;
+    max-height: 85svh;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+@media (max-height: 560px) and (max-width: 900px) {
+  .viewport-area {
+    min-height: 440px;
+  }
+
+  .viewport-heading {
+    top: 16px;
+  }
+
+  .viewer {
+    margin-top: 145px;
+  }
+
+  .view-controls {
+    bottom: 115px;
+  }
+}

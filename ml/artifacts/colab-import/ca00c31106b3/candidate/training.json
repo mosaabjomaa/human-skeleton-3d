@@ -1,0 +1,14 @@
+{
+  "architecture": "YOLO11s",
+  "input_size": 640,
+  "freeze": 0,
+  "epochs_requested": 80,
+  "split_counts": {
+    "train": 2806,
+    "validation": 601,
+    "test": 603
+  },
+  "seconds": 4927.447078943253,
+  "device": "0",
+  "deployed": false
+}
