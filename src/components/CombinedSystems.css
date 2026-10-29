@@ -147,3 +147,111 @@
     font-size: 18px;
   }
 }
+
+.merged-mobile-toolbar {
+  display: none;
+}
+@media (max-width: 800px) {
+  .merged-mobile-toolbar {
+    display: block;
+    padding: 10px 12px;
+    border-bottom: 1px solid #315341;
+  }
+  .merged-mobile-toolbar button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    min-height: 42px;
+    border: 1px solid #42634b;
+    background: #163124;
+    color: #d5e9d9;
+    border-radius: 9px;
+    padding: 10px 12px;
+    font: inherit;
+    font-size: 12px;
+  }
+  .merged-workspace {
+    min-height: 0;
+  }
+  .merged-layers {
+    display: none;
+    max-height: min(50svh, 420px);
+    overscroll-behavior: contain;
+  }
+  .merged-layers.is-open {
+    display: block;
+  }
+  .merged-viewer > .merged-canvas {
+    height: clamp(300px, calc(100svh - 250px), 640px) !important;
+    min-height: 300px;
+  }
+  .merged-caption {
+    padding: 10px 12px;
+    font-size: 10px;
+  }
+  .merged-controls {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+  .merged-controls button,
+  .merged-controls label {
+    min-height: 40px;
+  }
+  .merged-controls input[type="checkbox"],
+  .merged-layer input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+  }
+  .merged-layer > label {
+    min-height: 36px;
+    line-height: 1.6;
+  }
+  .combined-atlas .app-header h1 {
+    min-width: 0;
+    max-width: 45%;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+  }
+  .merged-layer-actions button {
+    min-height: 40px;
+  }
+}
+@media (max-width: 1000px) and (max-height: 500px) {
+  .merged-mobile-toolbar {
+    display: block;
+    padding: 8px 12px;
+  }
+  .merged-mobile-toolbar button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    min-height: 40px;
+    border: 1px solid #42634b;
+    background: #163124;
+    color: #d5e9d9;
+    border-radius: 9px;
+    padding: 8px 12px;
+    font: inherit;
+    font-size: 12px;
+  }
+  .merged-workspace {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+  .merged-layers {
+    display: none;
+    max-height: 60svh;
+  }
+  .merged-layers.is-open {
+    display: block;
+  }
+  .merged-viewer > .merged-canvas {
+    height: 70svh !important;
+    min-height: 260px;
+  }
+}

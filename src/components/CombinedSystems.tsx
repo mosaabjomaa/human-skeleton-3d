@@ -51,6 +51,7 @@ function label(layer: Layer, ar: boolean) {
 const ids = new Set(bodyParts.map((p) => p.id));
 
 export function CombinedSystems({ onBack }: { onBack: () => void }) {
+  const [layersOpen, setLayersOpen] = useState(false);
   const ar = useAppStore((s) => s.language) === "ar";
   const bonePanel = useAppStore((s) => s.panelOpen),
     autoRotate = useAppStore((s) => s.autoRotate),
@@ -189,8 +190,22 @@ export function CombinedSystems({ onBack }: { onBack: () => void }) {
           <h1>{ar ? "دمج كل الأجهزة" : "All systems combined"}</h1>
           <LanguageSwitcher />
         </header>
+        <div className="merged-mobile-toolbar">
+          <button
+            aria-expanded={layersOpen}
+            aria-controls="merged-layer-panel"
+            onClick={() => setLayersOpen((v) => !v)}
+          >
+            <Icon name="layers" />
+            {ar ? "الأجهزة والشفافية" : "Layers and opacity"}
+            <span>{layersOpen ? "−" : "+"}</span>
+          </button>
+        </div>
         <main className="merged-workspace">
-          <aside className="merged-layers">
+          <aside
+            id="merged-layer-panel"
+            className={`merged-layers ${layersOpen ? "is-open" : ""}`}
+          >
             <div className="eyebrow">{ar ? "طبقات الجسم" : "BODY LAYERS"}</div>
             <h2>{ar ? "11 جهازًا في مجسم واحد" : "11 systems, one model"}</h2>
             <p>
@@ -300,6 +315,7 @@ export function CombinedSystems({ onBack }: { onBack: () => void }) {
               }
             >
               <Canvas
+                className="merged-canvas"
                 dpr={[1, 1.25]}
                 frameloop={autoRotate ? "always" : "demand"}
                 camera={{

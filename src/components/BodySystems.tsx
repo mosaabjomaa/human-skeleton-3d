@@ -384,6 +384,7 @@ export function BodySystems({
 }) {
   const ar = useAppStore((s) => s.language) === "ar",
     i = ar ? 1 : 0;
+  const [browserOpen, setBrowserOpen] = useState(false);
   const [system, setSystem] = useState<BodySystem>("muscular"),
     [query, setQuery] = useState(""),
     [category, setCategory] = useState("all");
@@ -466,8 +467,22 @@ export function BodySystems({
             </button>
           ))}
         </nav>
+        <div className="body-mobile-toolbar">
+          <button
+            aria-expanded={browserOpen}
+            aria-controls="body-browser-panel"
+            onClick={() => setBrowserOpen((v) => !v)}
+          >
+            <Icon name="search" />
+            {ar ? "قائمة الأجزاء والبحث" : "Structure browser"}
+            <span>{browserOpen ? "−" : "+"}</span>
+          </button>
+        </div>
         <main className="body-workspace">
-          <aside className="body-browser">
+          <aside
+            id="body-browser-panel"
+            className={`body-browser ${browserOpen ? "is-open" : ""}`}
+          >
             <div className="eyebrow">
               {ar ? "مكتبة البنى التشريحية" : "STRUCTURE LIBRARY"}
             </div>

@@ -576,3 +576,117 @@
     padding: 8px 8px 10px;
   }
 }
+
+/* Compact mobile header: keep every action reachable without page overflow. */
+@media (max-width: 900px) {
+  .atlas-shell > .app-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto auto;
+    gap: 10px 8px;
+    height: auto;
+    min-height: 0;
+    padding: 12px;
+  }
+  .atlas-shell > .app-header .brand {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    gap: 8px;
+  }
+  .atlas-shell > .app-header .brand > span:last-child {
+    font-size: 19px;
+    letter-spacing: 2px;
+  }
+  .atlas-shell > .app-header .brand small {
+    font-size: 6px;
+    letter-spacing: 1px;
+  }
+  .atlas-shell > .app-header .brand-symbol {
+    width: 32px;
+    height: 32px;
+  }
+  .atlas-shell > .app-header .header-center {
+    display: none;
+  }
+  .atlas-shell > .app-header .header-actions {
+    display: contents;
+  }
+  .atlas-shell > .app-header .language-button {
+    grid-row: 1;
+    grid-column: 2;
+    min-height: 40px;
+    padding: 8px;
+  }
+  .atlas-shell > .app-header .help-button {
+    grid-row: 1;
+    grid-column: 3;
+    display: flex;
+    min-width: 36px;
+    min-height: 40px;
+    justify-content: center;
+    padding: 8px;
+  }
+  .atlas-shell > .app-header .header-actions > .mobile-only.icon-button {
+    grid-row: 1;
+    grid-column: 4;
+    display: flex;
+    min-width: 36px;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+  }
+  .atlas-shell > .app-header .display-mode-switch {
+    grid-column: 1/-1;
+    grid-row: 2;
+    display: flex;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    gap: 6px;
+    padding: 3px 0 7px;
+    scrollbar-width: thin;
+  }
+  .atlas-shell > .app-header .display-mode-switch .preview-switch {
+    flex: 0 0 auto;
+    min-height: 40px;
+    padding: 8px 10px;
+    gap: 6px;
+  }
+  .atlas-shell > .app-header .display-mode-switch .preview-switch span {
+    display: inline;
+    font-size: 11px;
+  }
+  .atlas-shell > .app-header .header-actions > .preview-switch {
+    grid-row: 3;
+    grid-column: 1/3;
+    display: flex;
+    min-width: 0;
+    min-height: 40px;
+    justify-content: center;
+    font-size: 12px;
+    padding: 8px;
+    white-space: normal;
+  }
+  .atlas-shell > .app-header .xray-entry {
+    grid-row: 3;
+    grid-column: 3/-1;
+    display: block;
+    min-width: 0;
+    min-height: 40px;
+    font-size: 11px !important;
+    padding: 8px !important;
+    white-space: normal;
+  }
+  .atlas-shell,
+  .workspace,
+  .viewport-area,
+  .viewer {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .selection-strip strong,
+  .selection-strip small {
+    overflow-wrap: anywhere;
+  }
+}
