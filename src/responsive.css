@@ -1,11 +1,174 @@
 @media (max-width: 900px) {
+  .app-header {
+    padding-inline: 18px;
+  }
+
+  .header-actions {
+    gap: 10px;
+  }
+
+  .display-mode-switch .preview-switch span,
+  .xray-entry {
+    display: none;
+  }
+
+  .display-mode-switch .preview-switch {
+    padding: 7px;
+  }
+
+  .help-button span {
+    display: none;
+  }
+
   .workspace {
     height: auto;
     min-height: 0;
   }
 
   .viewport-area {
-    min-height: clamp(480px, calc(100svh - 220px), 760px);
+    min-height: 0;
+    padding: 16px 14px 0;
+  }
+
+  .viewport-heading {
+    position: static;
+    inset: auto;
+    max-width: none;
+    padding: 0 6px 10px;
+  }
+
+  .viewport-heading .eyebrow,
+  .viewport-heading p {
+    display: none;
+  }
+
+  .viewport-heading h1 {
+    margin: 0;
+    font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.25;
+  }
+
+  [dir="rtl"] .viewport-heading h1 {
+    font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.25;
+  }
+
+  .circulation-tools {
+    position: static;
+    width: auto;
+    margin: 0 0 10px;
+    padding: 9px 10px;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .circulation-tools > .eyebrow {
+    display: none;
+  }
+
+  .circulation-filter-row {
+    margin-top: 0;
+  }
+
+  .circulation-filter-row + .circulation-filter-row {
+    margin-top: 4px;
+  }
+
+  .viewer,
+  .circulation-viewer {
+    flex: none;
+    height: calc(clamp(420px, 58svh, 680px) + 38px);
+    min-height: 0;
+    margin: 0;
+  }
+
+  .canvas-shell {
+    inset-block-end: 38px;
+  }
+
+  .viewer-legend {
+    display: none;
+  }
+
+  .orientation-switch {
+    bottom: 4px;
+  }
+
+  .view-controls {
+    position: relative;
+    inset: auto;
+    align-self: flex-end;
+    width: max-content;
+    max-width: 100%;
+    margin-top: 5px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    z-index: 3;
+  }
+
+  .mobile-controls-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 36px;
+    padding: 0 10px;
+    border: 1px solid #94bba455;
+    border-radius: 7px;
+    background: #10271fe8;
+    color: #b7d2bf;
+    font-size: 9px;
+    backdrop-filter: blur(12px);
+  }
+
+  .mobile-controls-toggle svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .view-controls-content {
+    display: none;
+  }
+
+  .view-controls.mobile-open {
+    width: min(185px, calc(100vw - 24px));
+    padding: 13px 11px;
+    border: 1px solid #94bba455;
+    border-radius: 9px;
+    background: #10271ff2;
+    box-shadow: 0 12px 35px #0005;
+    backdrop-filter: blur(16px);
+  }
+
+  .view-controls.mobile-open .mobile-controls-toggle {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #78a78b33;
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: none;
+  }
+
+  .view-controls.mobile-open .view-controls-content {
+    display: block;
+  }
+
+  .view-controls-content .control-toggle {
+    font-size: 9px;
+  }
+
+  .selection-strip {
+    margin: 8px 0 0;
+  }
+
+  .viewer-help {
+    padding: 10px 8px 12px;
   }
 
   .library {
@@ -26,31 +189,204 @@
 @media (max-width: 600px) {
   .workspace {
     height: auto;
+    min-height: 0;
   }
 
   .viewport-area {
-    min-height: clamp(500px, calc(100svh - 150px), 720px);
-    padding-bottom: env(safe-area-inset-bottom);
+    min-height: 0;
+    padding: 12px 10px 0;
   }
 
-  .circulation-legend {
-    max-width: calc(100% - 30px);
+  .app-header {
+    padding-inline: 12px;
+  }
+
+  .header-actions {
+    gap: 6px;
+  }
+
+  .xray-entry {
+    display: none;
+  }
+
+  .viewport-heading {
+    position: static;
+    inset: auto;
+    max-width: none;
+    padding: 0 5px 8px;
+  }
+
+  .viewport-heading .eyebrow,
+  .viewport-heading p {
+    display: none;
+  }
+
+  .viewport-heading h1 {
+    margin: 0;
+    font-size: clamp(18px, 5vw, 22px);
+    line-height: 1.25;
+    letter-spacing: -0.3px;
+  }
+
+  [dir="rtl"] .viewport-heading h1 {
+    font-size: clamp(18px, 5vw, 22px);
+    line-height: 1.35;
+  }
+
+  .circulation-tools {
+    position: static;
+    width: auto;
+    margin: 0 0 8px;
+    padding: 7px 8px;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .circulation-tools > .eyebrow {
+    display: none;
+  }
+
+  .circulation-filter-row {
+    margin-top: 0;
+    padding: 2px;
+  }
+
+  .circulation-filter-row + .circulation-filter-row {
+    margin-top: 4px;
+  }
+
+  .circulation-filter-row button {
+    min-height: 30px;
+    padding: 5px 3px;
+    font-size: 9px;
+  }
+
+  .circulation-isolate {
+    margin-top: 5px;
+    min-height: 24px;
+    font-size: 9px;
   }
 
   .viewer {
-    margin-top: clamp(175px, 48vw, 215px);
+    flex: none;
+    height: calc(clamp(360px, 55svh, 540px) + 38px);
+    min-height: 0;
+    margin: 0;
   }
 
-  .view-controls {
-    bottom: calc(143px + env(safe-area-inset-bottom));
+  .canvas-shell {
+    inset-block-end: 38px;
   }
 
-  .orientation-switch {
-    bottom: calc(15px + env(safe-area-inset-bottom));
+  .circulation-viewer {
+    margin: 0;
   }
 
   .viewer-legend {
-    bottom: calc(19px + env(safe-area-inset-bottom));
+    display: none;
+  }
+
+  .orientation-switch {
+    bottom: 4px;
+  }
+
+  .selection-strip {
+    margin: 8px 0 0;
+  }
+
+  .viewer-help {
+    padding: 10px 8px 12px;
+  }
+
+  .view-controls {
+    position: relative;
+    inset: auto;
+    align-self: flex-end;
+    width: max-content;
+    max-width: 100%;
+    margin-top: 5px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    z-index: 3;
+  }
+
+  .mobile-controls-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 36px;
+    padding: 0 10px;
+    border: 1px solid #94bba455;
+    border-radius: 7px;
+    background: #10271fe8;
+    color: #b7d2bf;
+    font-size: 9px;
+    backdrop-filter: blur(12px);
+  }
+
+  .mobile-controls-toggle svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .view-controls-content {
+    display: none;
+  }
+
+  .view-controls.mobile-open {
+    width: min(185px, calc(100vw - 24px));
+    padding: 13px 11px;
+    border: 1px solid #94bba455;
+    border-radius: 9px;
+    background: #10271ff2;
+    box-shadow: 0 12px 35px #0005;
+    backdrop-filter: blur(16px);
+  }
+
+  .view-controls.mobile-open .mobile-controls-toggle {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #78a78b33;
+    border-radius: 0;
+    background: transparent;
+    backdrop-filter: none;
+  }
+
+  .view-controls.mobile-open .view-controls-content {
+    display: block;
+  }
+
+  .view-controls-content .view-controls-title {
+    display: flex;
+  }
+
+  .view-controls-content .control-toggle {
+    font-size: 9px;
+    padding: 8px 0;
+  }
+
+  .view-controls-content .explode-control {
+    margin-top: 7px;
+    padding-top: 11px;
+  }
+
+  .view-controls-content .explode-control > label {
+    font-size: 9px;
+  }
+
+  .view-controls-content .explode-control > div {
+    font-size: 7px;
+  }
+
+  .view-controls-content .reset-button {
+    margin-top: 12px;
   }
 
   .app-footer {
@@ -64,27 +400,175 @@
   }
 }
 
-@media (max-height: 560px) and (max-width: 900px) {
+@media (max-width: 360px) {
+  .app-header {
+    padding-inline: 8px;
+  }
+
+  .brand {
+    gap: 6px;
+  }
+
+  .header-actions {
+    gap: 4px;
+  }
+}
+
+@media (max-width: 340px) {
+  .app-header {
+    padding-inline: 6px;
+  }
+
+  .brand {
+    gap: 5px;
+  }
+
+  .header-actions {
+    gap: 3px;
+  }
+}
+
+@media (max-height: 560px) and (min-width: 601px) and (max-width: 900px) {
+  .app-header {
+    height: 64px;
+    padding-inline: 14px;
+  }
+
+  .workspace {
+    height: auto;
+    min-height: 0;
+  }
+
   .viewport-area {
-    min-height: 440px;
+    min-height: 0;
+    padding: 8px 10px 0;
   }
 
   .viewport-heading {
-    top: 16px;
+    position: static;
+    inset: auto;
+    max-width: none;
+    padding: 0 5px 6px;
   }
 
-  .viewer {
-    margin-top: 145px;
+  .viewport-heading .eyebrow,
+  .viewport-heading p {
+    display: none;
   }
+
+  .viewport-heading h1 {
+    margin: 0;
+    font-size: clamp(18px, 3vw, 24px);
+    line-height: 1.2;
+  }
+
+  [dir="rtl"] .viewport-heading h1 {
+    font-size: clamp(18px, 3vw, 24px);
+    line-height: 1.2;
+  }
+
   .circulation-tools {
-    top: 132px;
+    position: static;
+    width: auto;
+    margin: 0 0 6px;
+    padding: 6px 8px;
+    box-shadow: none;
+    backdrop-filter: none;
   }
 
+  .circulation-tools > .eyebrow {
+    display: none;
+  }
+
+  .circulation-filter-row {
+    margin-top: 0;
+  }
+
+  .circulation-filter-row + .circulation-filter-row {
+    margin-top: 3px;
+  }
+
+  .circulation-filter-row button {
+    min-height: 26px;
+  }
+
+  .circulation-isolate {
+    min-height: 20px;
+    margin-top: 3px;
+  }
+
+  .viewer,
   .circulation-viewer {
-    margin-top: 290px;
+    flex: none;
+    height: clamp(230px, calc(100svh - 220px), 320px);
+    min-height: 0;
+    margin: 0;
+  }
+
+  .canvas-shell {
+    inset-block-end: 38px;
+  }
+
+  .viewer-legend {
+    display: none;
+  }
+
+  .orientation-switch {
+    bottom: 4px;
   }
 
   .view-controls {
-    bottom: 115px;
+    position: relative;
+    inset: auto;
+    align-self: flex-end;
+    width: max-content;
+    max-width: 100%;
+    margin-top: 5px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .view-controls.mobile-open {
+    width: min(185px, calc(100vw - 24px));
+    padding: 13px 11px;
+    border: 1px solid #94bba455;
+    border-radius: 9px;
+    background: #10271ff2;
+    box-shadow: 0 12px 35px #0005;
+    backdrop-filter: blur(16px);
+  }
+
+  .view-controls.mobile-open .mobile-controls-toggle {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #78a78b33;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .view-controls-content {
+    display: none;
+  }
+
+  .view-controls.mobile-open .view-controls-content {
+    display: block;
+  }
+
+  .view-controls-content .control-toggle {
+    font-size: 9px;
+  }
+
+  .selection-strip {
+    margin: 6px 0 0;
+  }
+
+  .viewer-help {
+    padding: 8px 8px 10px;
   }
 }

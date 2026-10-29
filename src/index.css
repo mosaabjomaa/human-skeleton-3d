@@ -698,6 +698,9 @@ input[type="checkbox"] {
   border-radius: 10px;
   z-index: 3;
 }
+.mobile-controls-toggle {
+  display: none;
+}
 .view-controls-title {
   display: flex;
   align-items: center;
