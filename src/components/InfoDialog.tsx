@@ -53,8 +53,14 @@ export function InfoDialog({
             <a href={`${import.meta.env.BASE_URL}models/skeleton.glb`} download>
               {t("downloadModel")} ↓
             </a>
-            <a href={`${import.meta.env.BASE_URL}models/circulatory.glb`} download>
+            <a
+              href={`${import.meta.env.BASE_URL}models/circulatory.glb`}
+              download
+            >
               {t("downloadCirculationModel")} ↓
+            </a>
+            <a href={`${import.meta.env.BASE_URL}models/visceral.glb`} download>
+              {t("downloadVisceralModel")} ↓
             </a>
           </>
         )}

@@ -1,0 +1,1556 @@
+{
+  "source": "https://github.com/LluisV/Z-Anatomy/blob/6c7f9016bd5899ac8edafd31b9900c151df42ed6/Resources/Models/FBX/VisceralSystem100.fbx",
+  "sourceSha256": "22b301c93327929c9a14ee582d1848b550a950376e221a6d1078c7256bb83d0e",
+  "convertedSourceSha256": "6ad89edb026f75eb68e7d02ab82cc1c55f4e026ac2bed11830f2fa3e8ac21037",
+  "license": "CC-BY-SA-4.0",
+  "attribution": "Z-Anatomy (Kousaku Okubo, Gauthier Kervyn, Colline Brassard, Christophe Céleste) / BodyParts3D (Database Center for Life Science).",
+  "modifications": "Selected named respiratory and digestive structures from the visceral source, retained the source anatomical transforms, assigned system/category metadata and distinct materials, and compressed the derived model with Meshopt. The pharynx is shared by both systems; unrelated urinary, genital, and endocrine structures are excluded.",
+  "excludedSourceStructureCount": 76,
+  "counts": {
+    "respiratory": 81,
+    "digestive": 134,
+    "shared": 5
+  },
+  "structures": [
+    {
+      "id": "vis-21",
+      "name": "Pleura",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "midline"
+    },
+    {
+      "id": "vis-23",
+      "name": "Trachea",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "midline"
+    },
+    {
+      "id": "vis-24",
+      "name": "Tracheobronchial tree.j",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "midline"
+    },
+    {
+      "id": "vis-25",
+      "name": "Left main bronchus",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "left"
+    },
+    {
+      "id": "vis-26",
+      "name": "Left superior lobar bronchus",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "left"
+    },
+    {
+      "id": "vis-27",
+      "name": "Apicoposterior segmental bronchus of left lung (BI+BII)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "left"
+    },
+    {
+      "id": "vis-28",
+      "name": "Anterior segmental bronchus of left lung (BIII)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "left"
+    },
+    {
+      "id": "vis-29",
+      "name": "Superior lingular segmental bronchus of left lung (BIV)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "left"
+    },
+    {
+      "id": "vis-30",
+      "name": "Inferior lingular segmental bronchus of left lung (BV)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "left"
+    },
+    {
+      "id": "vis-31",
+      "name": "Left inferior lobar bronchus",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "left"
+    },
+    {
+      "id": "vis-32",
+      "name": "Superior segmental bronchus of left lung (BVI)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "left"
+    },
+    {
+      "id": "vis-33",
+      "name": "Medial basal segmental bronchus of left lung (BVII)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "left"
+    },
+    {
+      "id": "vis-34",
+      "name": "Anterior basal segmental bronchus of left lung (BVIII)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "left"
+    },
+    {
+      "id": "vis-35",
+      "name": "Lateral basal segmental bronchus of left lung (BIX)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "left"
+    },
+    {
+      "id": "vis-36",
+      "name": "Posterior basal segmental bronchus of left lung (BX)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "left"
+    },
+    {
+      "id": "vis-37",
+      "name": "(Anteromedial basal segmental bronchus of left lung)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "left"
+    },
+    {
+      "id": "vis-38",
+      "name": "Bronchi.j",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "midline"
+    },
+    {
+      "id": "vis-39",
+      "name": "Right main bronchus",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "right"
+    },
+    {
+      "id": "vis-40",
+      "name": "Right superior lobar bronchus",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "right"
+    },
+    {
+      "id": "vis-41",
+      "name": "Anterior segmental bronchus of right lung (BIII)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "right"
+    },
+    {
+      "id": "vis-42",
+      "name": "Apical segmental bronchus of right lung (BI)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "right"
+    },
+    {
+      "id": "vis-43",
+      "name": "Posterior segmental bronchus of right lung (BII)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "right"
+    },
+    {
+      "id": "vis-44",
+      "name": "Intermediate bronchus.r",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "right"
+    },
+    {
+      "id": "vis-45",
+      "name": "Right inferior lobar bronchus",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "right"
+    },
+    {
+      "id": "vis-46",
+      "name": "Superior segmental bronchus of right lung (BVI)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "right"
+    },
+    {
+      "id": "vis-47",
+      "name": "Posterior basal segmental bronchus of right lung (BX)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "right"
+    },
+    {
+      "id": "vis-48",
+      "name": "Medial basal segmental bronchus of right lung (BVII)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "right"
+    },
+    {
+      "id": "vis-49",
+      "name": "Lateral basal segmental bronchus of right lung (BIX)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "right"
+    },
+    {
+      "id": "vis-50",
+      "name": "Anterior basal segmental bronchus of right lung (BVIII)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "right"
+    },
+    {
+      "id": "vis-51",
+      "name": "Middle lobar bronchus.r",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "right"
+    },
+    {
+      "id": "vis-52",
+      "name": "Lateral segmental bronchus of right lung (BIV)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "right"
+    },
+    {
+      "id": "vis-53",
+      "name": "Medial segmental bronchus of right lung (BV)",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "right"
+    },
+    {
+      "id": "vis-54",
+      "name": "Paranasal sinuses.j",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "midline"
+    },
+    {
+      "id": "vis-55",
+      "name": "Nose.j",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "midline"
+    },
+    {
+      "id": "vis-56",
+      "name": "Mucosa of nasal cavity",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "midline"
+    },
+    {
+      "id": "vis-57",
+      "name": "Lungs.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "midline"
+    },
+    {
+      "id": "vis-58",
+      "name": "Right lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "right"
+    },
+    {
+      "id": "vis-59",
+      "name": "Superior lobe of right lung",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "right"
+    },
+    {
+      "id": "vis-60",
+      "name": "Anterior border of lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "midline"
+    },
+    {
+      "id": "vis-61",
+      "name": "Anterior segment of right lung (SIII).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "right"
+    },
+    {
+      "id": "vis-62",
+      "name": "Apex of lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "midline"
+    },
+    {
+      "id": "vis-63",
+      "name": "Apical segment of right lung (SI).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "right"
+    },
+    {
+      "id": "vis-64",
+      "name": "Cardiac impression of lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "midline"
+    },
+    {
+      "id": "vis-65",
+      "name": "Costal surface of lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "midline"
+    },
+    {
+      "id": "vis-66",
+      "name": "Hilum of lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "midline"
+    },
+    {
+      "id": "vis-67",
+      "name": "Mediastinal surface of lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "midline"
+    },
+    {
+      "id": "vis-68",
+      "name": "Posterior segment of right lung (SII).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "right"
+    },
+    {
+      "id": "vis-69",
+      "name": "Root of lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "midline"
+    },
+    {
+      "id": "vis-70",
+      "name": "Middle lobe of right lung",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "right"
+    },
+    {
+      "id": "vis-71",
+      "name": "Horizontal fissure of right lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "right"
+    },
+    {
+      "id": "vis-72",
+      "name": "Inferior border of lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "midline"
+    },
+    {
+      "id": "vis-73",
+      "name": "Interlobar surface of lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "midline"
+    },
+    {
+      "id": "vis-74",
+      "name": "Lateral segment of right lung (SIV).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "right"
+    },
+    {
+      "id": "vis-75",
+      "name": "Medial segment of right lung (SV).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "right"
+    },
+    {
+      "id": "vis-76",
+      "name": "Inferior lobe of right lung",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "right"
+    },
+    {
+      "id": "vis-77",
+      "name": "Base of lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "midline"
+    },
+    {
+      "id": "vis-78",
+      "name": "Diaphragmatic surface of lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "midline"
+    },
+    {
+      "id": "vis-79",
+      "name": "Lateral basal segment of right lung (SIX).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "right"
+    },
+    {
+      "id": "vis-80",
+      "name": "Lobe of lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "midline"
+    },
+    {
+      "id": "vis-81",
+      "name": "Medial basal segment of right lung (SVII).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "right"
+    },
+    {
+      "id": "vis-82",
+      "name": "Medial surface of lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "midline"
+    },
+    {
+      "id": "vis-83",
+      "name": "Oblique fissure of right lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "right"
+    },
+    {
+      "id": "vis-84",
+      "name": "Posterior basal segment of right lung (SX).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "right"
+    },
+    {
+      "id": "vis-85",
+      "name": "Superior segment of right lung (SVI).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "right"
+    },
+    {
+      "id": "vis-86",
+      "name": "Anterior basal segment of right lung (SVIII).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "right"
+    },
+    {
+      "id": "vis-87",
+      "name": "Left lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "left"
+    },
+    {
+      "id": "vis-88",
+      "name": "Superior lobe of left lung",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "left"
+    },
+    {
+      "id": "vis-89",
+      "name": "Anterior segment of left lung (SIII).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "left"
+    },
+    {
+      "id": "vis-90",
+      "name": "Apicoposterior segment of left lung (SI+SII).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "left"
+    },
+    {
+      "id": "vis-91",
+      "name": "Cardiac notch of left lung.j",
+      "system": "shared",
+      "category": "lung",
+      "side": "left"
+    },
+    {
+      "id": "vis-92",
+      "name": "Inferior lingular segment of left lung (SV).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "left"
+    },
+    {
+      "id": "vis-93",
+      "name": "Lingula of left lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "left"
+    },
+    {
+      "id": "vis-94",
+      "name": "Superior lingular segment of left lung (SIV).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "left"
+    },
+    {
+      "id": "vis-95",
+      "name": "Inferior lobe of left lung",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "left"
+    },
+    {
+      "id": "vis-96",
+      "name": "Anterior basal segment of left lung (SVIII).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "left"
+    },
+    {
+      "id": "vis-97",
+      "name": "Lateral basal segment of left lung (SIX).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "left"
+    },
+    {
+      "id": "vis-98",
+      "name": "Medial basal segment of left lung (SVII).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "left"
+    },
+    {
+      "id": "vis-99",
+      "name": "Oblique fissure of left lung.j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "left"
+    },
+    {
+      "id": "vis-100",
+      "name": "Posterior basal segment of left lung (SX).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "left"
+    },
+    {
+      "id": "vis-101",
+      "name": "Superior segment of left lung (SVI).j",
+      "system": "respiratory",
+      "category": "lung",
+      "side": "left"
+    },
+    {
+      "id": "vis-102",
+      "name": "Epiglottis",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "midline"
+    },
+    {
+      "id": "vis-103",
+      "name": "Larynx.j",
+      "system": "respiratory",
+      "category": "airway",
+      "side": "midline"
+    },
+    {
+      "id": "vis-156",
+      "name": "Liver",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-157",
+      "name": "Left posterior lateral segment of liver (II)",
+      "system": "digestive",
+      "category": "organs",
+      "side": "left"
+    },
+    {
+      "id": "vis-158",
+      "name": "Left anterior lateral segment of liver (III)",
+      "system": "digestive",
+      "category": "organs",
+      "side": "left"
+    },
+    {
+      "id": "vis-159",
+      "name": "Left medial segment of liver (IV)",
+      "system": "digestive",
+      "category": "organs",
+      "side": "left"
+    },
+    {
+      "id": "vis-160",
+      "name": "Anterior medial segment of liver (V)",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-161",
+      "name": "Anterior lateral segment of liver (VI)",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-162",
+      "name": "Posterior lateral segment of liver (VII)",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-163",
+      "name": "Posterior segment of liver (I)",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-164",
+      "name": "Posterior medial segment of liver (VIII)",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-165",
+      "name": "Anterior lateral segment of liver (VI).j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-166",
+      "name": "Anterior medial segment of liver (V).j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-167",
+      "name": "Anterior surface of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-168",
+      "name": "Bare area of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-169",
+      "name": "Cardiac impression of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-170",
+      "name": "Caudate lobe.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-171",
+      "name": "Colic impression of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-172",
+      "name": "Diaphragmatic surface of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-173",
+      "name": "Duodenal impression of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-174",
+      "name": "Fibrous appendix of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-175",
+      "name": "Fissure for ligamentum teres.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-176",
+      "name": "Fissure for ligamentum venosum.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-177",
+      "name": "Fossa for gallbladder.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-178",
+      "name": "Gastric impression of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-179",
+      "name": "Inferior border of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-180",
+      "name": "Left anterior lateral segment of liver (III).j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "left"
+    },
+    {
+      "id": "vis-181",
+      "name": "Left lateral division of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "left"
+    },
+    {
+      "id": "vis-182",
+      "name": "Left lobe of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "left"
+    },
+    {
+      "id": "vis-183",
+      "name": "Left medial division of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "left"
+    },
+    {
+      "id": "vis-184",
+      "name": "Left medial segment of liver (IV).j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "left"
+    },
+    {
+      "id": "vis-185",
+      "name": "Left part of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "left"
+    },
+    {
+      "id": "vis-186",
+      "name": "Left posterior lateral segment of liver (II).j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "left"
+    },
+    {
+      "id": "vis-187",
+      "name": "Main portal fissure.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-188",
+      "name": "Notch for ligamentum teres.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-189",
+      "name": "Oesophageal impression of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-190",
+      "name": "Omental tuberosity of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-191",
+      "name": "Papillary process.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-192",
+      "name": "Porta hepatis.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-193",
+      "name": "Posterior medial segment of liver (VIII).j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-194",
+      "name": "Posterior part of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-195",
+      "name": "Posterior segment of liver (I).j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-196",
+      "name": "Posterior surface of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-197",
+      "name": "Quadrate lobe.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-198",
+      "name": "Right lateral division of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "right"
+    },
+    {
+      "id": "vis-199",
+      "name": "Right lobe of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "right"
+    },
+    {
+      "id": "vis-200",
+      "name": "Right medial division of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "right"
+    },
+    {
+      "id": "vis-201",
+      "name": "Right part of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "right"
+    },
+    {
+      "id": "vis-202",
+      "name": "Right portal fissure.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "right"
+    },
+    {
+      "id": "vis-203",
+      "name": "Right surface of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "right"
+    },
+    {
+      "id": "vis-204",
+      "name": "Superior surface of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-205",
+      "name": "Suprarenal impression of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-206",
+      "name": "Umbilical fissure.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-207",
+      "name": "Visceral surface of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-208",
+      "name": "Renal impression of liver.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-209",
+      "name": "Gallbladder",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-210",
+      "name": "Body of gallbladder.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-211",
+      "name": "Fundus of gallbladder.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-212",
+      "name": "Infundibulum of gallbladder.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-213",
+      "name": "Neck of gallbladder.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-214",
+      "name": "Pancreas",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-215",
+      "name": "Pancreatic duct",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-216",
+      "name": "Accessory pancreatic duct",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-217",
+      "name": "Anterior border of pancreas.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-218",
+      "name": "Antero-inferior surface of pancreas.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-219",
+      "name": "Anterosuperior surface of pancreas.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-220",
+      "name": "Body of pancreas.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-221",
+      "name": "Head of pancreas.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-222",
+      "name": "Inferior border of pancreas.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-224",
+      "name": "Pancreas.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-225",
+      "name": "Neck of pancreas.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-226",
+      "name": "Pancreatic notch.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-227",
+      "name": "Posterior surface of pancreas.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-228",
+      "name": "Superior border of pancreas.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-229",
+      "name": "Tail of pancreas.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-230",
+      "name": "Uncinate process of pancreas.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-231",
+      "name": "Digestive system.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-232",
+      "name": "Pharynx.j",
+      "system": "shared",
+      "category": "airway",
+      "side": "midline"
+    },
+    {
+      "id": "vis-233",
+      "name": "Oropharynx",
+      "system": "shared",
+      "category": "airway",
+      "side": "midline"
+    },
+    {
+      "id": "vis-234",
+      "name": "Nasopharynx",
+      "system": "shared",
+      "category": "airway",
+      "side": "midline"
+    },
+    {
+      "id": "vis-235",
+      "name": "Laryngopharynx",
+      "system": "shared",
+      "category": "airway",
+      "side": "midline"
+    },
+    {
+      "id": "vis-236",
+      "name": "Uvula of palate",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-237",
+      "name": "Gingiva",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-238",
+      "name": "Tongue",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-239",
+      "name": "Mouth.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-240",
+      "name": "Soft palate",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-241",
+      "name": "Salivary glands.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-242",
+      "name": "Major salivary glands.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-243",
+      "name": "Parotid gland.r",
+      "system": "digestive",
+      "category": "organs",
+      "side": "right"
+    },
+    {
+      "id": "vis-244",
+      "name": "(Accessory parotid gland).r",
+      "system": "digestive",
+      "category": "organs",
+      "side": "right"
+    },
+    {
+      "id": "vis-245",
+      "name": "Parotid gland.l",
+      "system": "digestive",
+      "category": "organs",
+      "side": "left"
+    },
+    {
+      "id": "vis-246",
+      "name": "(Accessory parotid gland).l",
+      "system": "digestive",
+      "category": "organs",
+      "side": "left"
+    },
+    {
+      "id": "vis-247",
+      "name": "Parotid duct.l",
+      "system": "digestive",
+      "category": "organs",
+      "side": "left"
+    },
+    {
+      "id": "vis-248",
+      "name": "Parotid duct.r",
+      "system": "digestive",
+      "category": "organs",
+      "side": "right"
+    },
+    {
+      "id": "vis-249",
+      "name": "Sublingual gland.l",
+      "system": "digestive",
+      "category": "organs",
+      "side": "left"
+    },
+    {
+      "id": "vis-250",
+      "name": "Sublingual gland.r",
+      "system": "digestive",
+      "category": "organs",
+      "side": "right"
+    },
+    {
+      "id": "vis-251",
+      "name": "Submandibular gland.l",
+      "system": "digestive",
+      "category": "organs",
+      "side": "left"
+    },
+    {
+      "id": "vis-252",
+      "name": "Submandibular gland.r",
+      "system": "digestive",
+      "category": "organs",
+      "side": "right"
+    },
+    {
+      "id": "vis-253",
+      "name": "Submandibular duct.l",
+      "system": "digestive",
+      "category": "organs",
+      "side": "left"
+    },
+    {
+      "id": "vis-254",
+      "name": "Submandibular duct.r",
+      "system": "digestive",
+      "category": "organs",
+      "side": "right"
+    },
+    {
+      "id": "vis-255",
+      "name": "Palate.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-256",
+      "name": "Fauces.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-257",
+      "name": "Bile duct",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-258",
+      "name": "Extrahepatic bile ducts.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-259",
+      "name": "Oesophagus",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-260",
+      "name": "Stomach",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-261",
+      "name": "Angular incisure.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-262",
+      "name": "Anterior wall of stomach.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-263",
+      "name": "Body of stomach.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-265",
+      "name": "Cardiac notch.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-266",
+      "name": "Fundus of stomach.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-267",
+      "name": "Greater curvature of stomach.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-268",
+      "name": "Lesser curvature of stomach.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-269",
+      "name": "Posterior wall of stomach.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-270",
+      "name": "Pyloric antrum.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-271",
+      "name": "Pyloric part.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-272",
+      "name": "Digestive canal.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-273",
+      "name": "Duodenum",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-274",
+      "name": "Jejunum",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-275",
+      "name": "Small intestine.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-276",
+      "name": "Large intestine.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-277",
+      "name": "Vermiform appendix",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-278",
+      "name": "Sigmoid colon",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-279",
+      "name": "Colon.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-280",
+      "name": "Ascending colon",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-281",
+      "name": "Descending colon",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-282",
+      "name": "Transverse colon",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-283",
+      "name": "Free taenia",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-284",
+      "name": "Mesocolic taenia",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-285",
+      "name": "Omental taenia",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-286",
+      "name": "Taeniae coli.j",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-287",
+      "name": "Abdominopelvic cavity.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-288",
+      "name": "Visceral fasciae of abdominopelvic cavity.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-289",
+      "name": "Peritoneum.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-290",
+      "name": "Peritoneal structures.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-291",
+      "name": "Mesocolon",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-292",
+      "name": "Meso-appendix",
+      "system": "digestive",
+      "category": "tract",
+      "side": "midline"
+    },
+    {
+      "id": "vis-293",
+      "name": "Greater omentum",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-294",
+      "name": "Lesser omentum",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    },
+    {
+      "id": "vis-295",
+      "name": "Peritoneal cavity.j",
+      "system": "digestive",
+      "category": "organs",
+      "side": "midline"
+    }
+  ]
+}

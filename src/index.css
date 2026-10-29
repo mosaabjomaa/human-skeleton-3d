@@ -170,6 +170,26 @@ input[type="checkbox"] {
   border-color: #c7646c80;
   background: #51252d88;
 }
+.display-mode-switch .preview-switch {
+  min-width: 0;
+}
+.system-filter-section + .system-filter-section {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #9a5c5733;
+}
+.system-filter-section > .eyebrow {
+  color: #b98581;
+}
+.visceral-filter-section .circulation-filter-row button {
+  padding-inline: 3px;
+}
+.all-system-filters .circulation-filter-row {
+  flex-wrap: wrap;
+}
+.all-system-filters .circulation-filter-row button {
+  flex: 1 1 40%;
+}
 .preview-switch {
   display: flex;
   align-items: center;
@@ -285,6 +305,17 @@ input[type="checkbox"] {
 }
 .vessel-filter-row button:first-child {
   flex: 0.65;
+}
+.visceral-key {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.airway-key {
+  background: #3dadb8;
+}
+.digestive-key {
+  background: #d49a46;
 }
 .circulation-isolate {
   display: flex;
@@ -1439,6 +1470,14 @@ input[type="checkbox"] {
   .app-header {
     height: 72px;
     padding-inline: 17px;
+  }
+  @media (max-width: 1280px) and (min-width: 901px) {
+    .display-mode-switch .preview-switch span {
+      display: none;
+    }
+    .display-mode-switch .preview-switch {
+      padding: 7px;
+    }
   }
   .brand {
     gap: 9px;

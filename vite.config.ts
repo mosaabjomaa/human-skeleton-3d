@@ -4,5 +4,8 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   base: "./",
-  server: { proxy: { "/api/xray": "http://127.0.0.1:8001" } },
+  server: {
+    watch: { ignored: ["**/work/**", "**/ml/**"] },
+    proxy: { "/api/xray": "http://127.0.0.1:8001" },
+  },
 });

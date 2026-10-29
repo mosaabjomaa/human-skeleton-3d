@@ -11,6 +11,13 @@ import type {
   CirculationPart,
   CirculationVesselType,
 } from "./CirculatoryAtlasModel";
+import { VisceralAtlasModel } from "./VisceralAtlasModel";
+import type {
+  VisceralCategory,
+  VisceralFocus,
+  VisceralPart,
+  VisceralSystem,
+} from "./VisceralAtlasModel";
 import { CameraRig } from "./CameraRig";
 import { Loader } from "./Loader";
 import { useAppStore } from "../store/useAppStore";
@@ -35,6 +42,14 @@ export function Scene({
   isolateSelected = false,
   onSelectPart,
   onHoverPart,
+  showVisceral = false,
+  visceralSystem = "all",
+  visceralCategory = "all",
+  selectedVisceralPartId = null,
+  isolateVisceralSelected = false,
+  visceralFocus = null,
+  onSelectVisceralPart,
+  onHoverVisceralPart,
 }: {
   showSkeleton?: boolean;
   showCirculation?: boolean;
@@ -45,6 +60,14 @@ export function Scene({
   isolateSelected?: boolean;
   onSelectPart?: (part: CirculationPart, focus: CirculationFocus) => void;
   onHoverPart?: (part: CirculationPart | null) => void;
+  showVisceral?: boolean;
+  visceralSystem?: VisceralSystem;
+  visceralCategory?: VisceralCategory;
+  selectedVisceralPartId?: string | null;
+  isolateVisceralSelected?: boolean;
+  visceralFocus?: VisceralFocus | null;
+  onSelectVisceralPart?: (part: VisceralPart, focus: VisceralFocus) => void;
+  onHoverVisceralPart?: (part: VisceralPart | null) => void;
 }) {
   const { t } = useTranslation();
   return (
@@ -56,11 +79,19 @@ export function Scene({
         className="canvas-shell"
         role="img"
         aria-label={t(
-          showSkeleton && showCirculation
-            ? "combinedModelLabel"
-            : showCirculation
-              ? "circulationModelLabel"
-              : "modelLabel",
+          showSkeleton && showCirculation && showVisceral
+            ? "allSystemsModelLabel"
+            : showCirculation && showVisceral
+              ? "combinedSystemsModelLabel"
+              : showVisceral && visceralSystem === "respiratory"
+                ? "respiratoryModelLabel"
+                : showVisceral && visceralSystem === "digestive"
+                  ? "digestiveModelLabel"
+                  : showSkeleton && showCirculation
+                    ? "combinedModelLabel"
+                    : showCirculation
+                      ? "circulationModelLabel"
+                      : "modelLabel",
         )}
       >
         <Canvas
@@ -68,7 +99,11 @@ export function Scene({
           dpr={[1, 1.5]}
           frameloop="demand"
           fallback={<SceneError />}
-          onPointerMissed={() => useAppStore.getState().setHovered(null)}
+          onPointerMissed={() => {
+            useAppStore.getState().setHovered(null);
+            onHoverPart?.(null);
+            onHoverVisceralPart?.(null);
+          }}
           gl={{
             antialias: true,
             alpha: true,
@@ -112,10 +147,20 @@ export function Scene({
                   vesselType={vesselType}
                   selectedPartId={selectedPartId}
                   isolateSelected={isolateSelected}
-                  onSelectPart={(part, focus) =>
-                    onSelectPart?.(part, focus)
-                  }
+                  onSelectPart={(part, focus) => onSelectPart?.(part, focus)}
                   onHoverPart={onHoverPart}
+                />
+              )}
+              {showVisceral && (
+                <VisceralAtlasModel
+                  system={visceralSystem}
+                  category={visceralCategory}
+                  selectedPartId={selectedVisceralPartId}
+                  isolateSelected={isolateVisceralSelected}
+                  onSelectPart={(part, focus) =>
+                    onSelectVisceralPart?.(part, focus)
+                  }
+                  onHoverPart={onHoverVisceralPart}
                 />
               )}
             </Bvh>
@@ -140,6 +185,8 @@ export function Scene({
           <CameraRig
             circulationCircuit={showCirculation ? circuit : undefined}
             circulationFocus={circulationFocus}
+            visceralFocus={visceralFocus}
+            visceralSystem={showVisceral ? visceralSystem : undefined}
           />
         </Canvas>
         <Loader />

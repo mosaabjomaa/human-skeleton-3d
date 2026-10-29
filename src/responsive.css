@@ -66,6 +66,10 @@
     display: none;
   }
 
+  .system-filter-section > .eyebrow {
+    display: none;
+  }
+
   .circulation-filter-row {
     margin-top: 0;
   }

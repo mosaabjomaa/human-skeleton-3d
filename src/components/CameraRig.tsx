@@ -10,12 +10,17 @@ import type {
   CirculationCircuit,
   CirculationFocus,
 } from "./CirculatoryAtlasModel";
+import type { VisceralFocus, VisceralSystem } from "./VisceralAtlasModel";
 export function CameraRig({
   circulationCircuit,
   circulationFocus,
+  visceralFocus,
+  visceralSystem,
 }: {
   circulationCircuit?: CirculationCircuit;
   circulationFocus?: CirculationFocus | null;
+  visceralFocus?: VisceralFocus | null;
+  visceralSystem?: VisceralSystem;
 }) {
   const controls = useRef<OrbitControlsImpl>(null);
   const camera = useThree((state) => state.camera);
@@ -29,6 +34,7 @@ export function CameraRig({
   useEffect(() => {
     const timer = requestAnimationFrame(() => {
       const bone = selected ? modelRegistry.get(selected) : null;
+      const focusedPart = circulationFocus ?? visceralFocus;
       let target = new Vector3(0, 1.52, 0),
         eye = new Vector3(0, 1.6, 5.6);
       if (bone) {
@@ -46,8 +52,8 @@ export function CameraRig({
               Math.max(0.045, Math.min(2.9, radius * 4.5)),
             ),
           );
-      } else if (circulationFocus) {
-        target.fromArray(circulationFocus.position);
+      } else if (focusedPart) {
+        target.fromArray(focusedPart.position);
         const direction = camera.position
           .clone()
           .sub(controls.current?.target || target);
@@ -55,9 +61,11 @@ export function CameraRig({
         eye = target
           .clone()
           .add(
-            direction.normalize().multiplyScalar(
-              Math.max(0.045, Math.min(2.9, circulationFocus.radius * 4.5)),
-            ),
+            direction
+              .normalize()
+              .multiplyScalar(
+                Math.max(0.045, Math.min(2.9, focusedPart.radius * 4.5)),
+              ),
           );
       } else {
         if (circulationCircuit === "pulmonary") {
@@ -65,6 +73,14 @@ export function CameraRig({
           eye.set(0, 2.38, 0.75);
         }
         if (circulationCircuit === "systemic") eye.set(0, 1.55, 4.8);
+        if (visceralSystem === "respiratory") {
+          target.set(0, 2.12, 0);
+          eye.set(0, 2.12, 3.4);
+        }
+        if (visceralSystem === "digestive") {
+          target.set(0, 1.95, 0);
+          eye.set(0, 1.95, 3.4);
+        }
         if (view === "back")
           eye.set(
             0,
@@ -96,6 +112,8 @@ export function CameraRig({
     reduced,
     circulationCircuit,
     circulationFocus,
+    visceralFocus,
+    visceralSystem,
     view,
   ]);
   useFrame((_, delta) => {

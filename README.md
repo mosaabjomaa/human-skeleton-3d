@@ -2,7 +2,7 @@
 
 # OSSEO — Human Skeleton 3D
 
-A static, bilingual adult skeleton atlas built with Vite, React, TypeScript, React Three Fiber, Drei, Three.js, Zustand, Tailwind CSS, Framer Motion and i18next.
+A static, bilingual anatomy atlas built with Vite, React, TypeScript, React Three Fiber, Drei, Three.js, Zustand, Tailwind CSS, Framer Motion and i18next.
 
 ## Run
 
@@ -26,8 +26,9 @@ Node.js **22.18+** is required: the model scripts use native TypeScript strippin
 - Isolate selection (hide other bones), exploded view, wireframe, auto rotation and reset.
 - Animated details drawer / mobile bottom sheet, related-bone navigation, Escape close, keyboard focus trap and reduced-motion support.
 - English and Arabic/RTL, locally bundled Cairo font and persisted language preference.
-- Three model views: skeleton, detailed circulation, or both systems aligned together in one 3D model.
+- Five model views: skeleton, detailed circulation, respiratory system, digestive system, or all four systems aligned together in one 3D model.
 - 676 independently selectable heart, valve, artery and vein structures, with anatomy details on selection; filter the systemic and pulmonary circuits and isolate individual parts. Lungs and capillary beds are not modeled.
+- 220 individually selectable respiratory and digestive structures, including 81 respiratory, 134 digestive and five shared pharyngeal structures; filter airways, lungs, digestive tract and accessory organs, inspect bilingual details, and isolate parts.
 - Meshopt-compressed model (~1.78 MiB), demand rendering, DPR cap, BVH raycasting and imperative material updates on hover.
 
 ## Checks
@@ -39,9 +40,13 @@ npm run build
 npm run preview
 ```
 
-On Windows, fetch and convert the pinned Z-Anatomy cardiovascular source with `npm run model:circulation:download`, then prepare it for the app with `npm run model:circulation:build`. See [CREDITS.md](./CREDITS.md) for attribution, license, source hashes and model limitations.
+On Windows, fetch and convert the pinned Z-Anatomy cardiovascular source with 
+pm run model:circulation:download`, then prepare it for the app with 
+pm run model:circulation:build`. Build the respiratory and digestive model with 
+pm run model:visceral:download` and 
+pm run model:visceral:build`. See [CREDITS.md](./CREDITS.md) for attribution, license, source hashes and model limitations.
 
-The combined view uses one shared normalization transform for the skeleton and cardiovascular assets so their source-space anatomy remains aligned. Circulatory detail text describes general vessel and circuit roles; the source-specific names and full part inventory are available in `public/models/circulatory-provenance.json`.
+The combined view uses one shared normalization transform for all model assets so their source-space anatomy remains aligned. Circulatory and visceral detail text describes general anatomical roles; source names and part inventories are available in the corresponding `public/models/*-provenance.json` files.
 
 `validate:bones` reads and decompresses the actual GLB, checks every expected dataset ID, verifies exactly 206 nodes and meshes, checks nonempty finite geometry, the 80/126 split, basic anatomical ordering, all bilingual fields, provenance mappings and the file-size target. It exits nonzero for a missing/unmapped bone. No count is fabricated from empty meshes.
 
@@ -106,3 +111,7 @@ The built `dist/` can be deployed to a static HTTP(S) host. Relative Vite base p
 ## X-ray research lab
 
 Open **X-ray lab / مختبر الأشعة** in the header. **npm run dev** starts the UI and the local ML service together when the Python environment is installed. To run the API separately, use **npm run ml:serve**. Training code, data attribution, evaluation methodology, supported formats, limitations, and Python setup are documented in **ml/README.md**. Outputs are experimental candidate regions, never a medical diagnosis; 3D bone selection is manually confirmed. Static hosting of `dist/` runs the atlas; the ML feature additionally needs the Python service and an `/api/xray` reverse proxy.
+
+## Additional body systems
+
+Seven additional selectable systems are available from **More body systems / باقي أجهزة الجسم**: muscular, nervous, integumentary, urinary, male reproductive, endocrine, and lymphatic. See ANATOMY_SYSTEMS.md for inventory, controls, source/licensing limitations, rebuild steps and GitHub update commands.

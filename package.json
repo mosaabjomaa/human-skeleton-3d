@@ -13,10 +13,15 @@
     "model:download": "node scripts/download-model.ts",
     "model:circulation:download": "node scripts/download-circulation-model.ts",
     "model:circulation:build": "node scripts/build-circulatory-model.ts",
+    "model:visceral:download": "node scripts/download-visceral-model.ts",
+    "model:visceral:build": "node scripts/build-visceral-model.ts",
+    "model:systems:download": "node scripts/download-body-systems.ts",
+    "model:systems:build": "node scripts/build-body-systems.ts",
     "format": "prettier --write src scripts vite.config.ts README.md CREDITS.md",
     "ml:download": "node scripts/ml.cjs download",
     "ml:train": "node scripts/ml.cjs train",
-    "ml:serve": "node scripts/ml.cjs serve"
+    "ml:serve": "node scripts/ml.cjs serve",
+    "validate:systems": "node scripts/validate-systems.ts"
   },
   "dependencies": {
     "@fontsource-variable/cairo": "^5.3.0",

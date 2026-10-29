@@ -9,6 +9,7 @@ import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { BoneTooltip } from "./components/BoneTooltip";
 import { DetailsPanel } from "./components/DetailsPanel";
 import { CirculationDetailsPanel } from "./components/CirculationDetailsPanel";
+import { VisceralDetailsPanel } from "./components/VisceralDetailsPanel";
 import { InfoDialog } from "./components/InfoDialog";
 import { Icon } from "./components/Icon";
 import { useAppStore } from "./store/useAppStore";
@@ -22,7 +23,18 @@ import type {
   CirculationVesselType,
 } from "./components/CirculatoryAtlasModel";
 import { formatCirculationName } from "./utils/circulationName";
+import type {
+  VisceralCategory,
+  VisceralFocus,
+  VisceralPart,
+  VisceralSystem,
+} from "./components/VisceralAtlasModel";
+import { formatVisceralName } from "./utils/visceralName";
+const BodySystems = lazy(() =>
+  import("./components/BodySystems").then((m) => ({ default: m.BodySystems })),
+);
 export default function App() {
+  const [additionalSystems, setAdditionalSystems] = useState(false);
   const { t } = useTranslation();
   const language = useAppStore((s) => s.language);
   const selectedId = useAppStore((s) => s.selectedId);
@@ -31,12 +43,20 @@ export default function App() {
   const region = useAppStore((s) => s.region);
   const group = useAppStore((s) => s.group);
   const [displayMode, setDisplayMode] = useState<
-    "skeleton" | "circulation" | "combined"
+    "skeleton" | "circulation" | "respiratory" | "digestive" | "combined"
   >("skeleton");
   const circulatoryPreview = displayMode === "circulation";
+  const respiratoryPreview = displayMode === "respiratory";
+  const digestivePreview = displayMode === "digestive";
   const combinedView = displayMode === "combined";
-  const showSkeleton = displayMode !== "circulation";
-  const showCirculation = displayMode !== "skeleton";
+  const showSkeleton = displayMode === "skeleton" || combinedView;
+  const showCirculation = circulatoryPreview || combinedView;
+  const showVisceral = respiratoryPreview || digestivePreview || combinedView;
+  const visceralSystem: VisceralSystem = respiratoryPreview
+    ? "respiratory"
+    : digestivePreview
+      ? "digestive"
+      : "all";
   const [circulationCircuit, setCirculationCircuit] =
     useState<CirculationCircuit>("all");
   const [circulationVesselType, setCirculationVesselType] =
@@ -49,6 +69,16 @@ export default function App() {
     useState<CirculationPart | null>(null);
   const [isolateCirculationPart, setIsolateCirculationPart] = useState(false);
   const [circulationDetailsOpen, setCirculationDetailsOpen] = useState(false);
+  const [visceralCategory, setVisceralCategory] =
+    useState<VisceralCategory>("all");
+  const [visceralPart, setVisceralPart] = useState<VisceralPart | null>(null);
+  const [visceralFocus, setVisceralFocus] = useState<VisceralFocus | null>(
+    null,
+  );
+  const [hoveredVisceralPart, setHoveredVisceralPart] =
+    useState<VisceralPart | null>(null);
+  const [isolateVisceralPart, setIsolateVisceralPart] = useState(false);
+  const [visceralDetailsOpen, setVisceralDetailsOpen] = useState(false);
   const [info, setInfo] = useState<"help" | "credits" | null>(null);
   const [xrayOpen, setXrayOpen] = useState(false);
   const closeXray = useCallback(() => setXrayOpen(false), []);
@@ -61,11 +91,15 @@ export default function App() {
       ar: {
         skeleton: "OSSEO — أطلس الهيكل العظمي",
         circulation: "OSSEO — مجسم الدورة الدموية",
+        respiratory: "OSSEO — مجسم الجهاز التنفسي",
+        digestive: "OSSEO — مجسم الجهاز الهضمي",
         combined: "OSSEO — مجسم تشريحي متكامل",
       },
       en: {
         skeleton: "OSSEO — The human skeleton atlas",
         circulation: "OSSEO — Circulatory system model",
+        respiratory: "OSSEO — Respiratory system model",
+        digestive: "OSSEO — Digestive system model",
         combined: "OSSEO — Combined anatomy model",
       },
     };
@@ -81,6 +115,12 @@ export default function App() {
     setHoveredCirculationPart(null);
     setIsolateCirculationPart(false);
     setCirculationDetailsOpen(false);
+    setVisceralCategory("all");
+    setVisceralPart(null);
+    setVisceralFocus(null);
+    setHoveredVisceralPart(null);
+    setIsolateVisceralPart(false);
+    setVisceralDetailsOpen(false);
     setDisplayMode(mode);
   };
   const selectCirculationPart = (
@@ -88,6 +128,10 @@ export default function App() {
     focus: CirculationFocus,
   ) => {
     setHoveredCirculationPart(null);
+    setVisceralPart(null);
+    setVisceralFocus(null);
+    setIsolateVisceralPart(false);
+    setVisceralDetailsOpen(false);
     useAppStore.setState({
       selectedId: null,
       panelOpen: false,
@@ -98,8 +142,28 @@ export default function App() {
     setIsolateCirculationPart(false);
     setCirculationDetailsOpen(true);
   };
+  const selectVisceralPart = (part: VisceralPart, focus: VisceralFocus) => {
+    setHoveredVisceralPart(null);
+    useAppStore.setState({
+      selectedId: null,
+      panelOpen: false,
+      isolate: false,
+    });
+    setCirculationPart(null);
+    setCirculationFocus(null);
+    setIsolateCirculationPart(false);
+    setCirculationDetailsOpen(false);
+    setVisceralPart(part);
+    setVisceralFocus(focus);
+    setIsolateVisceralPart(false);
+    setVisceralDetailsOpen(true);
+  };
   const hoverCirculationPart = useCallback(
     (part: CirculationPart | null) => setHoveredCirculationPart(part),
+    [],
+  );
+  const hoverVisceralPart = useCallback(
+    (part: VisceralPart | null) => setHoveredVisceralPart(part),
     [],
   );
   const updateCirculationFilters = (
@@ -123,6 +187,21 @@ export default function App() {
       setCirculationDetailsOpen(false);
     }
   };
+  const updateVisceralCategory = (category: VisceralCategory) => {
+    setHoveredVisceralPart(null);
+    setVisceralCategory(category);
+    if (
+      visceralPart &&
+      category !== "all" &&
+      visceralPart.category !== category &&
+      !(visceralPart.system === "shared" && category === "tract")
+    ) {
+      setVisceralPart(null);
+      setVisceralFocus(null);
+      setIsolateVisceralPart(false);
+      setVisceralDetailsOpen(false);
+    }
+  };
   useEffect(() => {
     return useAppStore.subscribe((state, previous) => {
       if (!state.selectedId || state.selectedId === previous.selectedId) return;
@@ -130,13 +209,35 @@ export default function App() {
       setCirculationFocus(null);
       setIsolateCirculationPart(false);
       setCirculationDetailsOpen(false);
+      setVisceralPart(null);
+      setVisceralFocus(null);
+      setIsolateVisceralPart(false);
+      setVisceralDetailsOpen(false);
     });
   }, []);
+  const visceralFilters: VisceralCategory[] =
+    visceralSystem === "respiratory"
+      ? ["all", "airway", "lung"]
+      : visceralSystem === "digestive"
+        ? ["all", "tract", "organs"]
+        : ["all", "airway", "lung", "tract", "organs"];
+  if (additionalSystems)
+    return (
+      <Suspense fallback={<div className="scene-error">Loading anatomy…</div>}>
+        <BodySystems onBack={() => setAdditionalSystems(false)} />
+      </Suspense>
+    );
   return (
     <>
       <div
         className="atlas-shell"
-        inert={panelOpen || circulationDetailsOpen || !!info || xrayOpen}
+        inert={
+          panelOpen ||
+          circulationDetailsOpen ||
+          visceralDetailsOpen ||
+          !!info ||
+          xrayOpen
+        }
       >
         <header className="app-header">
           <a
@@ -154,7 +255,11 @@ export default function App() {
                     ? "layers"
                     : circulatoryPreview
                       ? "vessels"
-                      : "bone"
+                      : respiratoryPreview
+                        ? "lungs"
+                        : digestivePreview
+                          ? "digestive"
+                          : "bone"
                 }
               />
             </span>
@@ -165,7 +270,11 @@ export default function App() {
                   ? t("showCombined")
                   : circulatoryPreview
                     ? t("circulationPreviewName")
-                    : t("atlas")}
+                    : respiratoryPreview
+                      ? t("respiratoryPreviewName")
+                      : digestivePreview
+                        ? t("digestivePreviewName")
+                        : t("atlas")}
               </small>
             </span>
           </a>
@@ -175,54 +284,83 @@ export default function App() {
             <span className="header-line" />
           </div>
           <div className="header-actions">
+            <button
+              className="preview-switch"
+              onClick={() => setAdditionalSystems(true)}
+            >
+              <Icon name="layers" />
+              {language === "ar" ? "باقي أجهزة الجسم" : "More body systems"}
+            </button>
             <div
               className="display-mode-switch"
               role="group"
               aria-label={t("modelView")}
             >
-              {(["skeleton", "circulation", "combined"] as const).map(
-                (mode) => (
-                  <button
-                    key={mode}
-                    className="preview-switch"
-                    onClick={() => setMode(mode)}
-                    aria-label={t(
-                      mode === "skeleton"
-                        ? "showSkeleton"
-                        : mode === "circulation"
-                          ? "showCirculation"
-                          : "showCombined",
-                    )}
-                    title={t(
-                      mode === "skeleton"
-                        ? "showSkeleton"
-                        : mode === "circulation"
-                          ? "showCirculation"
-                          : "showCombined",
-                    )}
-                    aria-pressed={displayMode === mode}
-                  >
-                    <Icon
-                      name={
-                        mode === "skeleton"
-                          ? "bone"
-                          : mode === "circulation"
-                            ? "vessels"
-                            : "layers"
-                      }
-                    />
-                    <span>
-                      {t(
-                        mode === "skeleton"
-                          ? "showSkeleton"
-                          : mode === "circulation"
-                            ? "showCirculation"
+              {(
+                [
+                  "skeleton",
+                  "circulation",
+                  "respiratory",
+                  "digestive",
+                  "combined",
+                ] as const
+              ).map((mode) => (
+                <button
+                  key={mode}
+                  className="preview-switch"
+                  onClick={() => setMode(mode)}
+                  aria-label={t(
+                    mode === "skeleton"
+                      ? "showSkeleton"
+                      : mode === "circulation"
+                        ? "showCirculation"
+                        : mode === "respiratory"
+                          ? "showRespiratory"
+                          : mode === "digestive"
+                            ? "showDigestive"
                             : "showCombined",
-                      )}
-                    </span>
-                  </button>
-                ),
-              )}
+                  )}
+                  title={t(
+                    mode === "skeleton"
+                      ? "showSkeleton"
+                      : mode === "circulation"
+                        ? "showCirculation"
+                        : mode === "respiratory"
+                          ? "showRespiratory"
+                          : mode === "digestive"
+                            ? "showDigestive"
+                            : "showCombined",
+                  )}
+                  aria-pressed={displayMode === mode}
+                >
+                  <Icon
+                    name={
+                      mode === "skeleton"
+                        ? "bone"
+                        : mode === "circulation"
+                          ? "vessels"
+                          : mode === "respiratory"
+                            ? "lungs"
+                            : mode === "digestive"
+                              ? "digestive"
+                              : "layers"
+                    }
+                  />
+                  <span>
+                    {t(
+                      mode === "skeleton"
+                        ? "showSkeleton"
+                        : mode === "circulation"
+                          ? "showCirculation"
+                          : mode === "respiratory"
+                            ? "showRespiratory"
+                            : mode === "digestive"
+                              ? "showDigestive"
+                              : "showCombined",
+                    )}
+                  </span>
+                </button>
+              ))}
             </div>
             <button className="xray-entry" onClick={() => setXrayOpen(true)}>
               {language === "ar" ? "مختبر الأشعة" : "X-ray lab"} ↗
@@ -243,7 +381,7 @@ export default function App() {
         </header>
         <main
           className={
-            circulatoryPreview
+            !showSkeleton
               ? "workspace circulatory-preview"
               : combinedView
                 ? "workspace combined-preview"
@@ -260,7 +398,11 @@ export default function App() {
                     ? "combinedEyebrow"
                     : circulatoryPreview
                       ? "circulationEyebrow"
-                      : "explore",
+                      : respiratoryPreview
+                        ? "respiratoryEyebrow"
+                        : digestivePreview
+                          ? "digestiveEyebrow"
+                          : "explore",
                 )}
               </span>
               <h1>
@@ -269,7 +411,11 @@ export default function App() {
                     ? "combinedHeadline"
                     : circulatoryPreview
                       ? "circulationHeadline"
-                      : "headline",
+                      : respiratoryPreview
+                        ? "respiratoryHeadline"
+                        : digestivePreview
+                          ? "digestiveHeadline"
+                          : "headline",
                 )}
               </h1>
               <p>
@@ -278,80 +424,133 @@ export default function App() {
                     ? "combinedIntro"
                     : circulatoryPreview
                       ? "circulationIntro"
-                      : "intro",
+                      : respiratoryPreview
+                        ? "respiratoryIntro"
+                        : digestivePreview
+                          ? "digestiveIntro"
+                          : "intro",
                 )}
               </p>
             </div>
-            {showCirculation && (
+            {(showCirculation || showVisceral) && (
               <div className="circulation-tools">
-                <span className="eyebrow">{t("circulationFilter")}</span>
-                <div
-                  className="circulation-filter-row"
-                  role="group"
-                  aria-label={t("circulationFilter")}
-                >
-                  {(
-                    ["all", "pulmonary", "systemic"] as CirculationCircuit[]
-                  ).map((value) => (
-                    <button
-                      key={value}
-                      aria-pressed={circulationCircuit === value}
-                      onClick={() =>
-                        updateCirculationFilters(value, circulationVesselType)
-                      }
+                {showCirculation && (
+                  <section className="system-filter-section">
+                    <span className="eyebrow">{t("circulationFilter")}</span>
+                    <div
+                      className="circulation-filter-row"
+                      role="group"
+                      aria-label={t("circulationFilter")}
                     >
-                      {t(
-                        value === "all"
-                          ? "allCirculation"
-                          : value === "pulmonary"
-                            ? "pulmonaryCircuit"
-                            : "systemicCircuit",
-                      )}
-                    </button>
-                  ))}
-                </div>
-                <div
-                  className="circulation-filter-row vessel-filter-row"
-                  role="group"
-                  aria-label={t("vesselTypeFilter")}
-                >
-                  {(["all", "artery", "vein"] as CirculationVesselType[]).map(
-                    (value) => (
-                      <button
-                        key={value}
-                        aria-pressed={circulationVesselType === value}
-                        onClick={() =>
-                          updateCirculationFilters(circulationCircuit, value)
-                        }
-                      >
-                        {t(
-                          value === "all"
-                            ? "allVessels"
-                            : value === "artery"
-                              ? "arteries"
-                              : "veins",
-                        )}
-                      </button>
-                    ),
-                  )}
-                </div>
-                <label className="circulation-isolate">
-                  <input
-                    type="checkbox"
-                    checked={isolateCirculationPart}
-                    disabled={!circulationPart}
-                    onChange={() => {
-                      setHoveredCirculationPart(null);
-                      setIsolateCirculationPart((isolated) => !isolated)
-                    }}
-                  />
-                  <span>{t("isolateCirculationPart")}</span>
-                </label>
+                      {(
+                        ["all", "pulmonary", "systemic"] as CirculationCircuit[]
+                      ).map((value) => (
+                        <button
+                          key={value}
+                          aria-pressed={circulationCircuit === value}
+                          onClick={() =>
+                            updateCirculationFilters(
+                              value,
+                              circulationVesselType,
+                            )
+                          }
+                        >
+                          {t(
+                            value === "all"
+                              ? "allCirculation"
+                              : value === "pulmonary"
+                                ? "pulmonaryCircuit"
+                                : "systemicCircuit",
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                    <div
+                      className="circulation-filter-row vessel-filter-row"
+                      role="group"
+                      aria-label={t("vesselTypeFilter")}
+                    >
+                      {(
+                        ["all", "artery", "vein"] as CirculationVesselType[]
+                      ).map((value) => (
+                        <button
+                          key={value}
+                          aria-pressed={circulationVesselType === value}
+                          onClick={() =>
+                            updateCirculationFilters(circulationCircuit, value)
+                          }
+                        >
+                          {t(
+                            value === "all"
+                              ? "allVessels"
+                              : value === "artery"
+                                ? "arteries"
+                                : "veins",
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                    <label className="circulation-isolate">
+                      <input
+                        type="checkbox"
+                        checked={isolateCirculationPart}
+                        disabled={!circulationPart}
+                        onChange={() => {
+                          setHoveredCirculationPart(null);
+                          setIsolateCirculationPart((isolated) => !isolated);
+                        }}
+                      />
+                      <span>{t("isolateCirculationPart")}</span>
+                    </label>
+                  </section>
+                )}
+                {showVisceral && (
+                  <section
+                    className={`system-filter-section visceral-filter-section${
+                      visceralSystem === "all" ? " all-system-filters" : ""
+                    }`}
+                  >
+                    <span className="eyebrow">{t("visceralFilter")}</span>
+                    <div
+                      className="circulation-filter-row"
+                      role="group"
+                      aria-label={t("visceralFilter")}
+                    >
+                      {visceralFilters.map((value) => (
+                        <button
+                          key={value}
+                          aria-pressed={visceralCategory === value}
+                          onClick={() => updateVisceralCategory(value)}
+                        >
+                          {t(
+                            value === "all"
+                              ? "allCirculation"
+                              : `visceralCategories.${value}`,
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                    <label className="circulation-isolate">
+                      <input
+                        type="checkbox"
+                        checked={isolateVisceralPart}
+                        disabled={!visceralPart}
+                        onChange={() => {
+                          setHoveredVisceralPart(null);
+                          setIsolateVisceralPart((isolated) => !isolated);
+                        }}
+                      />
+                      <span>{t("isolateVisceralPart")}</span>
+                    </label>
+                  </section>
+                )}
               </div>
             )}
             <div
               className={
-                showCirculation ? "viewer circulation-viewer" : "viewer"
+                showCirculation || showVisceral
+                  ? "viewer circulation-viewer"
+                  : "viewer"
               }
             >
               <Suspense
@@ -365,7 +564,9 @@ export default function App() {
                           ? "combinedLoadingDetail"
                           : circulatoryPreview
                             ? "circulationLoadingDetail"
-                            : "loadingDetail",
+                            : showVisceral
+                              ? "visceralLoadingDetail"
+                              : "loadingDetail",
                       )}
                     </p>
                   </div>
@@ -374,6 +575,7 @@ export default function App() {
                 <Scene
                   showSkeleton={showSkeleton}
                   showCirculation={showCirculation}
+                  showVisceral={showVisceral}
                   circuit={circulationCircuit}
                   vesselType={circulationVesselType}
                   selectedPartId={circulationPart?.id ?? null}
@@ -381,6 +583,13 @@ export default function App() {
                   isolateSelected={isolateCirculationPart}
                   onSelectPart={selectCirculationPart}
                   onHoverPart={hoverCirculationPart}
+                  visceralSystem={visceralSystem}
+                  visceralCategory={visceralCategory}
+                  selectedVisceralPartId={visceralPart?.id ?? null}
+                  isolateVisceralSelected={isolateVisceralPart}
+                  visceralFocus={visceralFocus}
+                  onSelectVisceralPart={selectVisceralPart}
+                  onHoverVisceralPart={hoverVisceralPart}
                 />
               </Suspense>
               {showSkeleton && (
@@ -401,6 +610,7 @@ export default function App() {
                     aria-pressed={view === value}
                     onClick={() => {
                       setCirculationFocus(null);
+                      setVisceralFocus(null);
                       useAppStore.getState().setView(value);
                     }}
                   >
@@ -408,7 +618,7 @@ export default function App() {
                   </button>
                 ))}
               </div>
-              {showCirculation ? (
+              {showCirculation || showVisceral ? (
                 <div className="viewer-legend circulation-legend">
                   {combinedView && (
                     <>
@@ -416,13 +626,31 @@ export default function App() {
                       {t("boneCount")}
                     </>
                   )}
-                  <span className="vessel-key artery-key" />
-                  {t("arteryCount")}
-                  <span className="vessel-key vein-key" />
-                  {t("veinCount")}
-                  <span className="vessel-key heart-key" />
-                  {t("heartCount")}
-                  <small>{t("circulationDisclaimer")}</small>
+                  {showCirculation && (
+                    <>
+                      <span className="vessel-key artery-key" />
+                      {t("arteryCount")}
+                      <span className="vessel-key vein-key" />
+                      {t("veinCount")}
+                      <span className="vessel-key heart-key" />
+                      {t("heartCount")}
+                    </>
+                  )}
+                  {showVisceral && (
+                    <>
+                      <span className="visceral-key airway-key" />
+                      {t("respiratorySystem")}
+                      <span className="visceral-key digestive-key" />
+                      {t("digestiveSystem")}
+                    </>
+                  )}
+                  <small>
+                    {combinedView
+                      ? t("combinedDisclaimer")
+                      : showCirculation
+                        ? t("circulationDisclaimer")
+                        : t("visceralDisclaimer")}
+                  </small>
                 </div>
               ) : (
                 <div className="viewer-legend">
@@ -488,7 +716,62 @@ export default function App() {
                   <Icon name="close" />
                 </button>
               </div>
-            ) : showCirculation && !showSkeleton ? (
+            ) : showVisceral && visceralPart ? (
+              <div className="selection-strip circulation-selection visceral-selection">
+                <span className="selection-icon">
+                  <Icon
+                    name={
+                      visceralPart.system === "digestive"
+                        ? "digestive"
+                        : "lungs"
+                    }
+                  />
+                </span>
+                <div>
+                  <span className="eyebrow">{t("selectedStructure")}</span>
+                  <strong>
+                    {formatVisceralName(visceralPart.name, language)}
+                  </strong>
+                  <small>
+                    {`${t(
+                      visceralPart.system === "respiratory"
+                        ? "respiratorySystem"
+                        : visceralPart.system === "digestive"
+                          ? "digestiveSystem"
+                          : "sharedSystem",
+                    )} · ${t(
+                      `visceralCategories.${visceralPart.category}`,
+                    )} · ${t(
+                      visceralPart.side === "right"
+                        ? "right"
+                        : visceralPart.side === "left"
+                          ? "left"
+                          : "midline",
+                    )}`}
+                  </small>
+                </div>
+                <button
+                  className="selection-open"
+                  onClick={() => setVisceralDetailsOpen(true)}
+                >
+                  {t("openDetails")}
+                  <Icon name="arrow" />
+                </button>
+                <button
+                  className="selection-open circulation-clear"
+                  onClick={() => {
+                    setVisceralPart(null);
+                    setVisceralFocus(null);
+                    setIsolateVisceralPart(false);
+                    setVisceralDetailsOpen(false);
+                  }}
+                  aria-label={t("clearSelection")}
+                  title={t("clearSelection")}
+                >
+                  <Icon name="close" />
+                </button>
+              </div>
+            ) : showCirculation && !showSkeleton && !showVisceral ? (
               <div className="selection-strip circulation-selection">
                 <span className="selection-icon">
                   <Icon name="vessels" />
@@ -503,6 +786,25 @@ export default function App() {
                         : circulationCircuit === "systemic"
                           ? "systemicFlow"
                           : "completeFlow",
+                    )}
+                  </small>
+                </div>
+              </div>
+            ) : showVisceral && !showSkeleton ? (
+              <div className="selection-strip circulation-selection visceral-selection">
+                <span className="selection-icon">
+                  <Icon name={digestivePreview ? "digestive" : "lungs"} />
+                </span>
+                <div>
+                  <span className="eyebrow">{t("selectedStructure")}</span>
+                  <strong>{t("selectVisceralPart")}</strong>
+                  <small>
+                    {t(
+                      `visceralRoute.${
+                        visceralSystem === "respiratory"
+                          ? "respiratoryRoute"
+                          : "digestiveRoute"
+                      }`,
                     )}
                   </small>
                 </div>
@@ -535,7 +837,7 @@ export default function App() {
                   </button>
                 ) : (
                   <span className="selection-number">
-                    {combinedView ? "206 + 676" : "206"}
+                    {combinedView ? "206 + 676 + 220" : "206"}
                     <span>↗</span>
                   </span>
                 )}
@@ -557,7 +859,15 @@ export default function App() {
         </main>
         <footer className="app-footer">
           <span>
-            {t(showCirculation ? "circulationDisclaimer" : "education")}
+            {t(
+              combinedView
+                ? "combinedDisclaimer"
+                : showCirculation
+                  ? "circulationDisclaimer"
+                  : showVisceral
+                    ? "visceralDisclaimer"
+                    : "education",
+            )}
           </span>
           {!showCirculation && (
             <button onClick={() => setInfo("credits")}>
@@ -570,6 +880,8 @@ export default function App() {
       <BoneTooltip
         circulationPart={hoveredCirculationPart}
         circulationDetailsOpen={circulationDetailsOpen}
+        visceralPart={hoveredVisceralPart}
+        visceralDetailsOpen={visceralDetailsOpen}
       />
       <DetailsPanel />
       <CirculationDetailsPanel
@@ -578,6 +890,13 @@ export default function App() {
         isolateSelected={isolateCirculationPart}
         onClose={() => setCirculationDetailsOpen(false)}
         onIsolate={() => setIsolateCirculationPart((isolated) => !isolated)}
+      />
+      <VisceralDetailsPanel
+        part={visceralPart}
+        open={visceralDetailsOpen}
+        isolateSelected={isolateVisceralPart}
+        onClose={() => setVisceralDetailsOpen(false)}
+        onIsolate={() => setIsolateVisceralPart((isolated) => !isolated)}
       />
       {info && <InfoDialog kind={info} onClose={closeInfo} />}
       {xrayOpen && <XrayLab onClose={closeXray} />}
