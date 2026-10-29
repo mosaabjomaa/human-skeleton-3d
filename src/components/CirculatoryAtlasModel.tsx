@@ -89,9 +89,7 @@ function isPartVisible(
   isolateSelected: boolean,
 ) {
   const circuitVisible =
-    circuit === "all" ||
-    part.circuit === circuit ||
-    part.circuit === "shared";
+    circuit === "all" || part.circuit === circuit || part.circuit === "shared";
   const typeVisible = vesselType === "all" || part.type === vesselType;
   return (
     circuitVisible &&
@@ -107,6 +105,7 @@ export function CirculatoryAtlasModel({
   isolateSelected,
   onSelectPart,
   onHoverPart,
+  wireframe = false,
 }: {
   circuit: CirculationCircuit;
   vesselType: CirculationVesselType;
@@ -114,6 +113,7 @@ export function CirculatoryAtlasModel({
   isolateSelected: boolean;
   onSelectPart: (part: CirculationPart, focus: CirculationFocus) => void;
   onHoverPart?: (part: CirculationPart | null) => void;
+  wireframe?: boolean;
 }) {
   const gltf = useLoader(
     GLTFLoader,
@@ -122,6 +122,14 @@ export function CirculatoryAtlasModel({
   );
   const invalidate = useThree((state) => state.invalidate);
   const materials = useMemo(() => createMaterials(), []);
+  useEffect(() => {
+    for (const material of [
+      ...Object.values(materials.normal),
+      ...Object.values(materials.highlighted),
+    ])
+      material.wireframe = wireframe;
+    invalidate();
+  }, [materials, wireframe, invalidate]);
   const model = useMemo(() => {
     const scene = gltf.scene.clone(true);
     scene.updateMatrixWorld(true);
@@ -196,13 +204,7 @@ export function CirculatoryAtlasModel({
     const part = getPart(event.object);
     if (
       !part ||
-      !isPartVisible(
-        part,
-        circuit,
-        vesselType,
-        selectedPartId,
-        isolateSelected,
-      )
+      !isPartVisible(part, circuit, vesselType, selectedPartId, isolateSelected)
     )
       return;
     event.stopPropagation();
@@ -220,13 +222,7 @@ export function CirculatoryAtlasModel({
     const part = getPart(event.object);
     if (
       !part ||
-      !isPartVisible(
-        part,
-        circuit,
-        vesselType,
-        selectedPartId,
-        isolateSelected,
-      )
+      !isPartVisible(part, circuit, vesselType, selectedPartId, isolateSelected)
     )
       return;
     event.stopPropagation();

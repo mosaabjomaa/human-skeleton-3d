@@ -33,7 +33,13 @@ import { formatVisceralName } from "./utils/visceralName";
 const BodySystems = lazy(() =>
   import("./components/BodySystems").then((m) => ({ default: m.BodySystems })),
 );
+const CombinedSystems = lazy(() =>
+  import("./components/CombinedSystems").then((m) => ({
+    default: m.CombinedSystems,
+  })),
+);
 export default function App() {
+  const [allSystemsCombined, setAllSystemsCombined] = useState(false);
   const [additionalSystems, setAdditionalSystems] = useState(false);
   const { t } = useTranslation();
   const language = useAppStore((s) => s.language);
@@ -221,10 +227,23 @@ export default function App() {
       : visceralSystem === "digestive"
         ? ["all", "tract", "organs"]
         : ["all", "airway", "lung", "tract", "organs"];
+  const openCombined = () => {
+    useAppStore.getState().reset();
+    setAllSystemsCombined(true);
+  };
+  if (allSystemsCombined)
+    return (
+      <Suspense fallback={<div className="scene-error">Loading anatomy…</div>}>
+        <CombinedSystems onBack={() => setAllSystemsCombined(false)} />
+      </Suspense>
+    );
   if (additionalSystems)
     return (
       <Suspense fallback={<div className="scene-error">Loading anatomy…</div>}>
-        <BodySystems onBack={() => setAdditionalSystems(false)} />
+        <BodySystems
+          onBack={() => setAdditionalSystems(false)}
+          onCombine={openCombined}
+        />
       </Suspense>
     );
   return (
@@ -308,7 +327,9 @@ export default function App() {
                 <button
                   key={mode}
                   className="preview-switch"
-                  onClick={() => setMode(mode)}
+                  onClick={() =>
+                    mode === "combined" ? openCombined() : setMode(mode)
+                  }
                   aria-label={t(
                     mode === "skeleton"
                       ? "showSkeleton"

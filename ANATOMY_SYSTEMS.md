@@ -14,6 +14,12 @@ Open **More body systems / باقي أجهزة الجسم** in the existing head
 
 Total: **1,279 additional selectable structures**. Counts include anatomical surfaces, landmarks and grouped structures, not that many distinct organs.
 
+## Combine all 11 systems
+
+Choose **Combine all systems / دمج كل الأجهزة** from the main header or the additional systems header. This opens a single anatomically aligned scene with the skeleton, circulation, respiratory/digestive structures and all seven additional systems. Eleven layer checkboxes control visibility; Show all/Hide all operate together. Additional-system opacity sliders default skin to 6% and muscles to 18% so internal structures remain visible. Low-opacity outer layers allow picking through them; raise opacity or hide overlying layers to select their own structures.
+
+Picking a structure opens its existing anatomy detail panel and focuses the camera. Isolation temporarily shows its layer and selected structure, with Exit isolation to return. Reset view, wireframe and auto rotation operate within the combined scene. Hidden layers are unmounted and model geometry is cached; rendering is on demand except during rotation. Mobile uses a scrollable layers panel above the scene. Reproductive coverage remains male-only, as in the individual view.
+
 Each view provides search, category filtering, hover highlighting, click/list selection, camera focus, orbit/pan/zoom, automatic rotation, wireframe, selection isolation, reset and seven expandable detail sections. UI and educational explanations support English and Arabic; verified translations are used where available and other source names remain visible.
 
 Details cover overview, location/side, function, category, functional route, representation limits and clinical context. These are organ/category/system-level educational summaries, not a bespoke surgical reference for every surface. References link to OpenStax and the per-structure model provenance.

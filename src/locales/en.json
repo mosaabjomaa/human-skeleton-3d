@@ -10,7 +10,7 @@
   "showRespiratory": "Respiratory",
   "showDigestive": "Digestive",
   "showSkeleton": "Skeleton",
-  "showCombined": "Core systems combined",
+  "showCombined": "Combine all systems",
   "modelView": "MODEL VIEW",
   "boneCount": "206 bones",
   "selectCombinedPart": "Select a structure from any system",

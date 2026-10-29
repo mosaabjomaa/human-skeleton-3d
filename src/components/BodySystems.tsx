@@ -52,7 +52,7 @@ function metadata(object: Object3D): BodyPart | undefined {
   return undefined;
 }
 
-function Anatomy({
+export function Anatomy({
   system,
   category,
   selected,
@@ -63,6 +63,8 @@ function Anatomy({
   visibleIds,
   onSelect,
   onHover,
+  cameraOwner = true,
+  opacity = 1,
 }: {
   system: BodySystem;
   category: string;
@@ -72,8 +74,13 @@ function Anatomy({
   rotate: boolean;
   reset: number;
   visibleIds: Set<string>;
-  onSelect: (p: BodyPart) => void;
+  onSelect: (
+    p: BodyPart,
+    focus?: { id: string; position: [number, number, number]; radius: number },
+  ) => void;
   onHover: (p: BodyPart | null) => void;
+  cameraOwner?: boolean;
+  opacity?: number;
 }) {
   const gltf = useLoader(
     GLTFLoader,
@@ -108,6 +115,14 @@ function Anatomy({
   );
   useEffect(() => {
     for (const m of Object.values(materials)) m.wireframe = wireframe;
+    const transparencyChanged = materials.normal.transparent !== opacity < 1;
+    Object.assign(materials.normal, {
+      opacity,
+      transparent: opacity < 1,
+      depthWrite: opacity >= 1,
+    });
+    if (transparencyChanged)
+      Object.assign(materials.normal, { needsUpdate: true });
     scene.traverse((o) => {
       if (!(o instanceof Mesh)) return;
       const p = metadata(o);
@@ -133,8 +148,10 @@ function Anatomy({
     materials,
     invalidate,
     visibleIds,
+    opacity,
   ]);
   useEffect(() => {
+    if (!cameraOwner) return;
     scene.updateWorldMatrix(true, true);
     const bounds = new Box3();
     scene.traverse((o) => {
@@ -170,30 +187,42 @@ function Anatomy({
     visibleIds,
     camera,
     invalidate,
+    cameraOwner,
   ]);
   const handle = (e: ThreeEvent<MouseEvent>) => {
     const p = metadata(e.object);
-    if (!p || !visibleIds.has(p.id)) return;
+    if (!p || !visibleIds.has(p.id) || opacity < 0.3) return;
     e.stopPropagation();
-    onSelect(p);
+    e.object.updateWorldMatrix(true, false);
+    const box = new Box3().setFromObject(e.object),
+      center = box.getCenter(new Vector3());
+    onSelect(p, {
+      id: p.id,
+      position: [center.x, center.y, center.z],
+      radius: box.getSize(new Vector3()).length() / 2,
+    });
   };
   return (
     <>
-      <ambientLight intensity={1} />
-      <hemisphereLight args={["#f4f5ee", "#293c34", 1.5]} />
-      <directionalLight position={[3, 4, 5]} intensity={2.5} />
-      <directionalLight
-        position={[-3, 2, -3]}
-        intensity={1.5}
-        color="#a5dfd0"
-      />
+      {cameraOwner && (
+        <>
+          <ambientLight intensity={1} />
+          <hemisphereLight args={["#f4f5ee", "#293c34", 1.5]} />
+          <directionalLight position={[3, 4, 5]} intensity={2.5} />
+          <directionalLight
+            position={[-3, 2, -3]}
+            intensity={1.5}
+            color="#a5dfd0"
+          />
+        </>
+      )}
       <group scale={anatomyScale} position={anatomyPosition}>
         <primitive
           object={scene}
           onClick={handle}
           onPointerOver={(e: ThreeEvent<PointerEvent>) => {
             const p = metadata(e.object);
-            if (p && visibleIds.has(p.id)) {
+            if (p && visibleIds.has(p.id) && opacity >= 0.3) {
               e.stopPropagation();
               setHover(p.id);
               onHover(p);
@@ -205,20 +234,22 @@ function Anatomy({
           }}
         />
       </group>
-      <OrbitControls
-        ref={controls}
-        makeDefault
-        enableDamping
-        autoRotate={rotate}
-        autoRotateSpeed={0.6}
-        minDistance={0.04}
-        maxDistance={15}
-      />
+      {cameraOwner && (
+        <OrbitControls
+          ref={controls}
+          makeDefault
+          enableDamping
+          autoRotate={rotate}
+          autoRotateSpeed={0.6}
+          minDistance={0.04}
+          maxDistance={15}
+        />
+      )}
     </>
   );
 }
 
-function PartDetails({
+export function PartDetails({
   part,
   ar,
   onClose,
@@ -344,7 +375,13 @@ function PartDetails({
   );
 }
 
-export function BodySystems({ onBack }: { onBack: () => void }) {
+export function BodySystems({
+  onBack,
+  onCombine,
+}: {
+  onBack: () => void;
+  onCombine?: () => void;
+}) {
   const ar = useAppStore((s) => s.language) === "ar",
     i = ar ? 1 : 0;
   const [system, setSystem] = useState<BodySystem>("muscular"),
@@ -406,6 +443,11 @@ export function BodySystems({ onBack }: { onBack: () => void }) {
             {ar ? "أجهزة جسم الإنسان" : "HUMAN BODY SYSTEMS"}
           </span>
           <LanguageSwitcher />
+          {onCombine && (
+            <button className="preview-switch" onClick={onCombine}>
+              {ar ? "دمج كل الأجهزة" : "Combine all systems"}
+            </button>
+          )}
         </header>
         <nav
           className="body-tabs"

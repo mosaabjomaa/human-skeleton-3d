@@ -107,6 +107,7 @@ export function VisceralAtlasModel({
   isolateSelected,
   onSelectPart,
   onHoverPart,
+  wireframe = false,
 }: {
   system: VisceralSystem;
   category: VisceralCategory;
@@ -114,6 +115,7 @@ export function VisceralAtlasModel({
   isolateSelected: boolean;
   onSelectPart: (part: VisceralPart, focus: VisceralFocus) => void;
   onHoverPart?: (part: VisceralPart | null) => void;
+  wireframe?: boolean;
 }) {
   const gltf = useLoader(
     GLTFLoader,
@@ -122,6 +124,14 @@ export function VisceralAtlasModel({
   );
   const invalidate = useThree((state) => state.invalidate);
   const materials = useMemo(() => createMaterials(), []);
+  useEffect(() => {
+    for (const material of [
+      ...Object.values(materials.normal),
+      ...Object.values(materials.highlighted),
+    ])
+      material.wireframe = wireframe;
+    invalidate();
+  }, [materials, wireframe, invalidate]);
   const model = useMemo(() => {
     const scene = gltf.scene.clone(true);
     scene.updateMatrixWorld(true);

@@ -1,0 +1,149 @@
+.combined-atlas .app-header h1 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+}
+.merged-workspace {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  min-height: calc(100dvh - 84px);
+}
+.merged-layers {
+  padding: 24px;
+  border-inline-end: 1px solid #315341;
+  max-height: calc(100dvh - 84px);
+  overflow: auto;
+}
+.merged-layers h2 {
+  font-size: 21px;
+  font-weight: 500;
+  margin: 10px 0;
+}
+.merged-layers p,
+.merged-layers small {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #9eb8a8;
+}
+.merged-layer-actions {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0;
+}
+.merged-layer-actions button,
+.merged-controls button {
+  border-radius: 7px;
+  border: 1px solid #4b6b50;
+  background: #1e3b2a;
+  color: #dbecdc;
+  padding: 9px 12px;
+  font: inherit;
+  font-size: 12px;
+}
+.merged-layer {
+  padding: 12px 0;
+  border-bottom: 1px solid #254032;
+}
+.merged-layer > label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+}
+.merged-layer input {
+  accent-color: #bada99;
+}
+.merged-layer .merged-opacity {
+  display: flex;
+  gap: 6px;
+  font-size: 10px;
+  color: #8eaa96;
+  padding-top: 8px;
+}
+.merged-opacity input {
+  min-width: 0;
+  flex: 1;
+}
+.merged-opacity output {
+  width: 34px;
+  text-align: end;
+}
+.merged-viewer {
+  min-width: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(ellipse at center, #17362a, #071b19);
+}
+.merged-viewer > div:has(canvas) {
+  height: calc(100dvh - 180px) !important;
+  min-height: 480px;
+}
+.merged-caption {
+  text-align: center;
+  padding: 16px;
+  font-size: 11px;
+  color: #9ab89c;
+}
+.merged-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 14px;
+  flex-wrap: wrap;
+}
+.merged-controls label {
+  font-size: 12px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.merged-empty {
+  position: absolute;
+  top: 45%;
+  inset-inline: 20px;
+  text-align: center;
+  color: #bdd4ae;
+  pointer-events: none;
+}
+.combined-atlas .app-header {
+  position: relative;
+}
+.combined-atlas {
+  overflow-x: clip;
+}
+.merged-viewer > .scene-loader {
+  position: absolute;
+}
+@media (max-width: 800px) {
+  .combined-atlas .app-header {
+    height: 70px;
+    flex-wrap: nowrap;
+    padding: 12px;
+    gap: 8px;
+  }
+  .combined-atlas .app-header h1 {
+    font-size: 15px;
+  }
+  .merged-workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .merged-layers {
+    max-height: 300px;
+    overflow: auto;
+    border-inline-end: 0;
+    border-bottom: 1px solid #315341;
+    padding: 18px;
+  }
+  .merged-viewer > div:has(canvas) {
+    height: 600px !important;
+    min-height: 500px;
+  }
+  .merged-controls {
+    gap: 10px;
+  }
+  .merged-layers h2 {
+    font-size: 18px;
+  }
+}
