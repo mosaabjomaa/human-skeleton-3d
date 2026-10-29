@@ -33,6 +33,10 @@
     padding-bottom: env(safe-area-inset-bottom);
   }
 
+  .circulation-legend {
+    max-width: calc(100% - 30px);
+  }
+
   .viewer {
     margin-top: clamp(175px, 48vw, 215px);
   }
@@ -71,6 +75,13 @@
 
   .viewer {
     margin-top: 145px;
+  }
+  .circulation-tools {
+    top: 132px;
+  }
+
+  .circulation-viewer {
+    margin-top: 290px;
   }
 
   .view-controls {

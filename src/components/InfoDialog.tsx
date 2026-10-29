@@ -53,6 +53,9 @@ export function InfoDialog({
             <a href={`${import.meta.env.BASE_URL}models/skeleton.glb`} download>
               {t("downloadModel")} ↓
             </a>
+            <a href={`${import.meta.env.BASE_URL}models/circulatory.glb`} download>
+              {t("downloadCirculationModel")} ↓
+            </a>
           </>
         )}
         <button className="primary-button" onClick={onClose}>

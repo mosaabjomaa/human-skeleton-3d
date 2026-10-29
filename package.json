@@ -11,6 +11,8 @@
     "validate:bones": "node scripts/validate-bones.ts",
     "model:build": "node scripts/build-model.ts",
     "model:download": "node scripts/download-model.ts",
+    "model:circulation:download": "node scripts/download-circulation-model.ts",
+    "model:circulation:build": "node scripts/build-circulatory-model.ts",
     "format": "prettier --write src scripts vite.config.ts README.md CREDITS.md",
     "ml:download": "node scripts/ml.cjs download",
     "ml:train": "node scripts/ml.cjs train",

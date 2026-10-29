@@ -22,6 +22,7 @@ export interface ModelPart {
   radius: number;
 }
 import { modelRegistry } from "../utils/modelRegistry";
+import { anatomyNormalization } from "../utils/anatomyTransform";
 
 export function SkeletonModel() {
   const gltf = useLoader(
@@ -33,13 +34,20 @@ export function SkeletonModel() {
   const parts = useMemo(() => {
     gltf.scene.updateMatrixWorld(true);
     const bounds = new Box3().setFromObject(gltf.scene);
-    const size = bounds.getSize(new Vector3());
-    const scale = 3.1 / size.y;
-    const origin = bounds.getCenter(new Vector3());
+    if (bounds.getSize(new Vector3()).y <= 0)
+      throw new Error("Invalid skeleton model bounds.");
     const normalize = new Matrix4()
-      .makeScale(scale, scale, scale)
+      .makeScale(
+        anatomyNormalization.scale,
+        anatomyNormalization.scale,
+        anatomyNormalization.scale,
+      )
       .multiply(
-        new Matrix4().makeTranslation(-origin.x, -bounds.min.y, -origin.z),
+        new Matrix4().makeTranslation(
+          -anatomyNormalization.origin[0],
+          -anatomyNormalization.origin[1],
+          -anatomyNormalization.origin[2],
+        ),
       );
     const result: ModelPart[] = [];
     gltf.scene.traverse((object) => {

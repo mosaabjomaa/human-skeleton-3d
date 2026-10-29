@@ -6,13 +6,24 @@ import { Vector3 } from "three";
 import { useReducedMotion } from "framer-motion";
 import { useAppStore } from "../store/useAppStore";
 import { modelRegistry } from "../utils/modelRegistry";
-export function CameraRig() {
+import type {
+  CirculationCircuit,
+  CirculationFocus,
+} from "./CirculatoryAtlasModel";
+export function CameraRig({
+  circulationCircuit,
+  circulationFocus,
+}: {
+  circulationCircuit?: CirculationCircuit;
+  circulationFocus?: CirculationFocus | null;
+}) {
   const controls = useRef<OrbitControlsImpl>(null);
   const camera = useThree((state) => state.camera);
   const invalidate = useThree((state) => state.invalidate);
   const selected = useAppStore((state) => state.selectedId);
   const nonce = useAppStore((state) => state.resetNonce);
   const autoRotate = useAppStore((state) => state.autoRotate);
+  const view = useAppStore((state) => state.view);
   const reduced = useReducedMotion();
   const flight = useRef<{ eye: Vector3; target: Vector3 } | null>(null);
   useEffect(() => {
@@ -35,11 +46,39 @@ export function CameraRig() {
               Math.max(0.045, Math.min(2.9, radius * 4.5)),
             ),
           );
+      } else if (circulationFocus) {
+        target.fromArray(circulationFocus.position);
+        const direction = camera.position
+          .clone()
+          .sub(controls.current?.target || target);
+        if (direction.lengthSq() < 0.0001) direction.set(0, 0, 1);
+        eye = target
+          .clone()
+          .add(
+            direction.normalize().multiplyScalar(
+              Math.max(0.045, Math.min(2.9, circulationFocus.radius * 4.5)),
+            ),
+          );
       } else {
-        const view = useAppStore.getState().view;
-        if (view === "back") eye.set(0, 1.6, -5.6);
-        if (view === "left") eye.set(5.6, 1.6, 0);
-        if (view === "right") eye.set(-5.6, 1.6, 0);
+        if (circulationCircuit === "pulmonary") {
+          target.set(0, 2.38, 0);
+          eye.set(0, 2.38, 0.75);
+        }
+        if (circulationCircuit === "systemic") eye.set(0, 1.55, 4.8);
+        if (view === "back")
+          eye.set(
+            0,
+            target.y,
+            circulationCircuit === "pulmonary" ? -0.75 : -5.6,
+          );
+        if (view === "left")
+          eye.set(circulationCircuit === "pulmonary" ? 0.75 : 5.6, target.y, 0);
+        if (view === "right")
+          eye.set(
+            circulationCircuit === "pulmonary" ? -0.75 : -5.6,
+            target.y,
+            0,
+          );
       }
       if (reduced) {
         camera.position.copy(eye);
@@ -49,7 +88,16 @@ export function CameraRig() {
       invalidate();
     });
     return () => cancelAnimationFrame(timer);
-  }, [selected, nonce, camera, invalidate, reduced]);
+  }, [
+    selected,
+    nonce,
+    camera,
+    invalidate,
+    reduced,
+    circulationCircuit,
+    circulationFocus,
+    view,
+  ]);
   useFrame((_, delta) => {
     if (!flight.current || !controls.current) return;
     const blend = 1 - Math.exp(-7 * delta);
@@ -69,6 +117,7 @@ export function CameraRig() {
       makeDefault
       enableDamping
       dampingFactor={0.08}
+      zoomToCursor
       minDistance={0.025}
       maxDistance={11}
       target={[0, 1.52, 0]}

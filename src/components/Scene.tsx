@@ -4,6 +4,13 @@ import { Bvh, Environment, Grid, Lightformer } from "@react-three/drei";
 import { ErrorBoundary } from "react-error-boundary";
 import { useTranslation } from "react-i18next";
 import { SkeletonModel } from "./SkeletonModel";
+import { CirculatoryAtlasModel } from "./CirculatoryAtlasModel";
+import type {
+  CirculationCircuit,
+  CirculationFocus,
+  CirculationPart,
+  CirculationVesselType,
+} from "./CirculatoryAtlasModel";
 import { CameraRig } from "./CameraRig";
 import { Loader } from "./Loader";
 import { useAppStore } from "../store/useAppStore";
@@ -18,11 +25,44 @@ function SceneError() {
     </div>
   );
 }
-export function Scene() {
+export function Scene({
+  showSkeleton = true,
+  showCirculation = false,
+  circuit = "all",
+  vesselType = "all",
+  selectedPartId = null,
+  circulationFocus = null,
+  isolateSelected = false,
+  onSelectPart,
+  onHoverPart,
+}: {
+  showSkeleton?: boolean;
+  showCirculation?: boolean;
+  circuit?: CirculationCircuit;
+  vesselType?: CirculationVesselType;
+  selectedPartId?: string | null;
+  circulationFocus?: CirculationFocus | null;
+  isolateSelected?: boolean;
+  onSelectPart?: (part: CirculationPart, focus: CirculationFocus) => void;
+  onHoverPart?: (part: CirculationPart | null) => void;
+}) {
   const { t } = useTranslation();
   return (
-    <ErrorBoundary fallback={<SceneError />}>
-      <div className="canvas-shell" role="img" aria-label={t("modelLabel")}>
+    <ErrorBoundary
+      fallback={<SceneError />}
+      onError={(error) => console.error("3D scene failed:", error)}
+    >
+      <div
+        className="canvas-shell"
+        role="img"
+        aria-label={t(
+          showSkeleton && showCirculation
+            ? "combinedModelLabel"
+            : showCirculation
+              ? "circulationModelLabel"
+              : "modelLabel",
+        )}
+      >
         <Canvas
           camera={{ position: [0, 1.6, 5.6], fov: 36, near: 0.001, far: 60 }}
           dpr={[1, 1.5]}
@@ -65,7 +105,19 @@ export function Scene() {
               />
             </Environment>
             <Bvh firstHitOnly>
-              <SkeletonModel />
+              {showSkeleton && <SkeletonModel />}
+              {showCirculation && (
+                <CirculatoryAtlasModel
+                  circuit={circuit}
+                  vesselType={vesselType}
+                  selectedPartId={selectedPartId}
+                  isolateSelected={isolateSelected}
+                  onSelectPart={(part, focus) =>
+                    onSelectPart?.(part, focus)
+                  }
+                  onHoverPart={onHoverPart}
+                />
+              )}
             </Bvh>
           </Suspense>
           <Grid
@@ -85,7 +137,10 @@ export function Scene() {
             <circleGeometry args={[0.52, 48]} />
             <meshBasicMaterial color="#4b9b7d" transparent opacity={0.06} />
           </mesh>
-          <CameraRig />
+          <CameraRig
+            circulationCircuit={showCirculation ? circuit : undefined}
+            circulationFocus={circulationFocus}
+          />
         </Canvas>
         <Loader />
       </div>

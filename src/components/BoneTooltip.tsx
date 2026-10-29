@@ -1,10 +1,23 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useAppStore } from "../store/useAppStore";
 import { boneById } from "../data/bones";
-export function BoneTooltip() {
+import type { CirculationPart } from "./CirculatoryAtlasModel";
+import { formatCirculationName } from "../utils/circulationName";
+import { getSpecificFunction } from "../utils/circulationDetails";
+import { useTranslation } from "react-i18next";
+export function BoneTooltip({
+  circulationPart = null,
+  circulationDetailsOpen = false,
+}: {
+  circulationPart?: CirculationPart | null;
+  circulationDetailsOpen?: boolean;
+}) {
+  const { t } = useTranslation();
   const id = useAppStore((s) => s.hoveredId);
-  const open = useAppStore((s) => s.panelOpen);
+  const panelOpen = useAppStore((s) => s.panelOpen);
   const language = useAppStore((s) => s.language);
+  const open = panelOpen || circulationDetailsOpen;
+  const hovered = !!id || !!circulationPart;
   const ref = useRef<HTMLDivElement>(null);
   const pointer = useRef({ x: 0, y: 0 });
   const place = useCallback(() => {
@@ -38,12 +51,35 @@ export function BoneTooltip() {
     };
   }, [place]);
   useEffect(() => {
-    document.documentElement.classList.toggle("bone-hovered", !!id && !open);
-    if (id && !open) place();
+    document.documentElement.classList.toggle("bone-hovered", hovered && !open);
+    if (hovered && !open) place();
     return () => document.documentElement.classList.remove("bone-hovered");
-  }, [id, open, place]);
-  if (!id || open) return null;
-  const bone = boneById[id];
+  }, [hovered, open, place]);
+  const bone = !circulationPart && id ? boneById[id] : null;
+  if ((!bone && !circulationPart) || open) return null;
+  const circulationName = circulationPart
+    ? formatCirculationName(circulationPart.name, language)
+    : null;
+  const circulationType = circulationPart
+    ? t(
+        circulationPart.type === "artery"
+          ? "arteryLabel"
+          : circulationPart.type === "vein"
+            ? "veinLabel"
+            : circulationPart.type === "heart"
+              ? "heartLabel"
+              : "otherLabel",
+      )
+    : null;
+  const circulationDescription =
+    circulationPart && circulationName
+      ? t(
+          `circulationFunction.${getSpecificFunction(
+            circulationPart,
+            formatCirculationName(circulationPart.name, "en"),
+          )}`,
+        )
+      : null;
   return (
     <div
       className="bone-tooltip"
@@ -51,9 +87,18 @@ export function BoneTooltip() {
       ref={ref}
       style={{ opacity: 0 }}
     >
-      <span>{bone.latinName}</span>
-      <strong>{bone.name[language]}</strong>
-      <p>{bone.shortDescription[language]}</p>
+      <span>
+        {bone?.latinName ??
+          `${circulationType} · ${t(
+            circulationPart?.circuit === "pulmonary"
+              ? "pulmonaryCircuit"
+              : circulationPart?.circuit === "systemic"
+                ? "systemicCircuit"
+                : "bothCircuits",
+          )}`}
+      </span>
+      <strong>{bone?.name[language] ?? circulationName}</strong>
+      <p>{bone?.shortDescription[language] ?? circulationDescription}</p>
     </div>
   );
 }

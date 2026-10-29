@@ -15,6 +15,16 @@
 
 Each output bone's original source names are recorded in `models/provenance.json`. The model download remains available from the credits dialog. Retain this notice, attribution and CC BY-SA 4.0 when sharing the derived model. No anatomical model endorsement is implied. The software and authored educational content are separate from the geometry license.
 
+**Cardiovascular system:** the detailed interactive circulation view and combined anatomy view use the separately named heart, valve, arterial, and venous structures from [Z-Anatomy's CardioVascular41 FBX](https://github.com/LluisV/Z-Anatomy/blob/6c7f9016bd5899ac8edafd31b9900c151df42ed6/Resources/Models/FBX/CardioVascular41.fbx).
+
+- Authors: Kousaku Okubo, Gauthier Kervyn, Colline Brassard, and Christophe Céleste; based on BodyParts3D, © Database Center for Life Science.
+- License: **CC BY-SA 4.0**. Attribute Z-Anatomy and BodyParts3D, link the license, and distribute adapted model data under the same license.
+- Source SHA-256: `ed7d049117cc944a8c47a416b16ade642cbd1392bbcce3c677450d3234dbf680`
+- This adaptation contains 676 separately selectable named structures, including 400 arteries, 212 veins, and heart/valve structures. Source geometry was converted to glTF, vessels were color-coded, and the result was compressed with Meshopt. Lungs and capillary beds are not included; the pulmonary route text describes their physiological role but does not visualize them.
+- The two model assets use a shared normalization transform in the combined view to preserve their aligned source-space coordinates. Circulatory detail text describes general functions and routes and is educational, not a medical reference.
+- Source names, circuit/type tags, and modification details are recorded in `models/circulatory-provenance.json`. Retain the attribution and share-alike license when redistributing the derived model.
+- Rebuild on Windows with `npm run model:circulation:download` followed by `npm run model:circulation:build`. Source and converter downloads are pinned and SHA-256 checked.
+
 ## Educational references
 
 Original short English/Arabic educational summaries were authored for this interface. Regional summaries are labeled; they are not a comprehensive medical textbook or independently peer-reviewed clinical reference. No source-page prose is reproduced as a dataset.
